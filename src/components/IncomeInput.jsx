@@ -3,24 +3,35 @@ import PropTypes from "prop-types";
 
 const IncomeInput = ({ setIncome }) => {
   const [type, setType] = useState("hourly");
-  const [amount, setAmount] = useState(0); // Hourly rate or annual salary
-  const [hours, setHours] = useState(40); // Default to 40 hours/week for hourly
+  const [amount, setAmount] = useState(0);
+  const [hours, setHours] = useState(40);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let calculatedAmount;
+    let annualIncome;
 
     if (type === "hourly") {
-      const regularHours = Math.min(hours, 40); // Maximum regular hours is 40
-      const overtimeHours = Math.max(hours - 40, 0); // Hours above 40 are overtime
-      calculatedAmount =
-        regularHours * amount + overtimeHours * amount * 1.5;
+      const regularHours = Math.min(hours, 40);
+      const overtimeHours = Math.max(hours - 40, 0);
+      const weeklyIncome = regularHours * amount + overtimeHours * amount * 1.5;
+      annualIncome = weeklyIncome * 52; // 52 weeks in a year
     } else {
-      calculatedAmount = amount; // Salary remains unchanged
+      annualIncome = amount; // Annual salary
     }
 
-    setIncome({ type, amount: parseFloat(calculatedAmount) });
+    const monthlyIncome = annualIncome / 12;
+    const biWeeklyIncome = annualIncome / 26;
+
+    setIncome({
+      type,
+      amount: annualIncome,
+      breakdown: {
+        annual: annualIncome.toFixed(2),
+        monthly: monthlyIncome.toFixed(2),
+        biweekly: biWeeklyIncome.toFixed(2),
+      },
+    });
   };
 
   return (
@@ -57,7 +68,7 @@ const IncomeInput = ({ setIncome }) => {
           />
         </label>
       )}
-      <button type="submit">Save Income</button>
+      <button type="submit">Calculate Income</button>
     </form>
   );
 };
