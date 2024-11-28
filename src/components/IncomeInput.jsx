@@ -35,8 +35,9 @@ const IncomeInput = ({ setIncome }) => {
   };
 
   return (
+    
     <form onSubmit={handleSubmit}>
-      <h2>Enter Your Income</h2>
+     <h2>Enter Your Income</h2>
       <label>
         Type:
         <select value={type} onChange={(e) => setType(e.target.value)}>

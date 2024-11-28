@@ -7,6 +7,9 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
   const [expenseFrequency, setExpenseFrequency] = useState("monthly");
   const [isEditing, setIsEditing] = useState(null); // Tracks the index being edited
 
+  // Calculate total expenses
+  const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+
   const handleAddExpense = (e) => {
     e.preventDefault();
     if (expenseName && expenseAmount > 0) {
@@ -58,7 +61,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
   return (
     <div className="fixed-expenses-input">
       <h2>Fixed Expenses</h2>
-      <form onSubmit={isEditing !== null ? handleSaveEdit : handleAddExpense}>
+      <form  className="form1" onSubmit={isEditing !== null ? handleSaveEdit : handleAddExpense}>
         <label>
           Expense Name:
           <input
@@ -107,6 +110,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
           </button>
         )}
       </form>
+
       <ul>
         {expenses.map((expense, index) => (
           <li key={index}>
@@ -116,6 +120,11 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
           </li>
         ))}
       </ul>
+
+      {/* Total Expenses Display */}
+      <p>
+        <strong>Total Expenses:</strong> ${totalExpenses.toFixed(2)}
+      </p>
     </div>
   );
 };

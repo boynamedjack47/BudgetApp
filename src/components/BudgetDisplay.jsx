@@ -1,8 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const BudgetDisplay = ({ income, expenses, savingsGoal }) => {
+const BudgetDisplay = ({ income, expenses }) => {
   const { breakdown } = income;
+
+  // Calculate total expenses
+  const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+
+  // Calculate remaining income after expenses
+  const remainingIncome = breakdown.monthly - totalExpenses;
+
+  // Helper function to determine the background color based on the value
+  const getAmountStyle = (amount) => {
+    return {
+      backgroundColor: amount >= 0 ? "green" : "red",
+      color: "white",
+      padding: "5px",
+      borderRadius: "5px",
+      display: "inline"
+    };
+  };
 
   return (
     <div className="budget-display">
@@ -29,7 +46,7 @@ const BudgetDisplay = ({ income, expenses, savingsGoal }) => {
           <ul>
             {expenses.map((expense, index) => (
               <li key={index}>
-                {expense.name}: ${expense.amount}
+                {expense.name}: ${expense.amount.toFixed(2)} ({expense.frequency})
               </li>
             ))}
           </ul>
@@ -38,10 +55,12 @@ const BudgetDisplay = ({ income, expenses, savingsGoal }) => {
         )}
       </div>
 
-      {/* Savings Goal */}
-      <div className="savings-section">
-        <h3>Savings Goal</h3>
-        <p>${savingsGoal || "No savings goal set."}</p>
+      {/* Remaining Income After Expenses */}
+      <div className="remaining-income-section">
+        <h3>Remaining Income After Expenses</h3>
+        <p style={getAmountStyle(remainingIncome)}>
+          ${remainingIncome.toFixed(2)}
+        </p>
       </div>
     </div>
   );
@@ -61,9 +80,9 @@ BudgetDisplay.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
+      frequency: PropTypes.string.isRequired,
     })
   ).isRequired,
-  savingsGoal: PropTypes.number.isRequired,
 };
 
 export default BudgetDisplay;
