@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import SavingsGoal from "./SavingsGoalInput"; // Adjust the path if necessary
+
 
 const BudgetDisplay = ({ income, expenses }) => {
   const { breakdown } = income;
@@ -62,6 +64,7 @@ const BudgetDisplay = ({ income, expenses }) => {
           ${remainingIncome.toFixed(2)}
         </p>
       </div>
+      <SavingsGoal remainingIncome={remainingIncome} />
     </div>
   );
 };
