@@ -18,17 +18,18 @@ const SafeToSpend = ({ remainingIncome, savingsStrategy }) => {
   // Determine the color of the progress bar based on safeToSpendAmount
   let progressClass = "green"; // Default to green
 
-if (safeToSpendAmount < 0) {
-  progressClass = "red"; // If negative, show red (over-budget)
-} else if (safeToSpendAmount >= remainingIncome * 0.75) {
-  progressClass = "green"; // If between 75% and 100%, show yellow
-} else if (safeToSpendAmount >= remainingIncome * 0.50) {
-  progressClass = "green"; // If between 50% and 75%, show light green
-} else {
-  progressClass = "yellow"; // If between 0% and 50%, show green
-}
+  if (safeToSpendAmount < 0) {
+    progressClass = "red"; // If negative, show red (over-budget)
+  } else if (safeToSpendAmount >= remainingIncome * 0.75) {
+    progressClass = "green"; // If between 75% and 100%, show green
+  } else if (safeToSpendAmount >= remainingIncome * 0.50) {
+    progressClass = "green-light"; // If between 50% and 75%, show light green
+  } else {
+    progressClass = "yellow"; // If between 0% and 50%, show yellow
+  }
 
-  
+  // Use the same class for the text as the progress bar
+  const textClass = progressClass; 
 
   return (
     <div className="safe-to-spend">
@@ -37,13 +38,17 @@ if (safeToSpendAmount < 0) {
       {/* Safe to Spend Amount */}
       <div className="amount">
         <span className="safe-to-spend-label">Monthly Budget: </span>
-        <span className="safe-to-spend-amount">${safeToSpendAmount.toFixed(2)}</span>
+        <span className={`safe-to-spend-amount ${textClass}`}>
+          ${safeToSpendAmount.toFixed(2)}
+        </span>
       </div>
 
       {/* Daily Spendable Amount */}
       <div className="amount">
         <span className="safe-to-spend-label">Daily Budget: </span>
-        <span className="safe-to-spend-amount">${dailyAmount.toFixed(2)}</span>
+        <span className={`safe-to-spend-amount ${textClass}`}>
+          ${dailyAmount.toFixed(2)}
+        </span>
       </div>
 
       {/* Progress Bar */}
@@ -59,10 +64,6 @@ if (safeToSpendAmount < 0) {
         Based on your savings strategy, this is how much you have left to spend this month.
       </p>
 
-      {/* Action Button 
-      <div className="button-container">
-        <button onClick={() => alert("Safe to Spend Action")}>Take Action</button>
-      </div> */}
     </div>
   );
 };

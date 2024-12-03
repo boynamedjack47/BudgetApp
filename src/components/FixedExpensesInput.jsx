@@ -1,130 +1,155 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faCar, faUtensils, faFilm, faHeart, faPiggyBank, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import './FixedExpensesInput.css';
 
 const FixedExpensesInput = ({ expenses, setExpenses }) => {
   const [expenseName, setExpenseName] = useState("");
-  const [expenseAmount, setExpenseAmount] = useState(0);
-  const [expenseFrequency, setExpenseFrequency] = useState("monthly");
-  const [isEditing, setIsEditing] = useState(null); // Tracks the index being edited
+  const [expenseAmount, setExpenseAmount] = useState("");
+  const [expenseCategory, setExpenseCategory] = useState("Housing");
+  const [editingId, setEditingId] = useState(null); // Track currently editing expense
+  const [visibleMenuId, setVisibleMenuId] = useState(null); // Track which settings menu is open
 
-  // Calculate total expenses
-  const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
-
-  const handleAddExpense = (e) => {
-    e.preventDefault();
-    if (expenseName && expenseAmount > 0) {
-      setExpenses([
-        ...expenses,
-        {
+  const handleAddOrEditExpense = () => {
+    if (expenseName && expenseAmount) {
+      if (editingId) {
+        // Update existing expense
+        setExpenses(
+          expenses.map((expense) =>
+            expense.id === editingId
+              ? {
+                  ...expense,
+                  name: expenseName,
+                  amount: parseFloat(expenseAmount),
+                  category: expenseCategory,
+                }
+              : expense
+          )
+        );
+        setEditingId(null); // Reset editing state
+      } else {
+        // Add new expense
+        const newExpense = {
+          id: Date.now(),
           name: expenseName,
           amount: parseFloat(expenseAmount),
-          frequency: expenseFrequency,
-        },
-      ]);
+          category: expenseCategory,
+        };
+        setExpenses([...expenses, newExpense]);
+      }
+      // Reset form fields
       setExpenseName("");
-      setExpenseAmount(0);
-      setExpenseFrequency("monthly");
+      setExpenseAmount("");
+      setExpenseCategory("Housing");
     }
   };
 
-  const handleEditExpense = (index) => {
-    const expenseToEdit = expenses[index];
-    setExpenseName(expenseToEdit.name);
-    setExpenseAmount(expenseToEdit.amount);
-    setExpenseFrequency(expenseToEdit.frequency);
-    setIsEditing(index);
+  const handleEditExpense = (id) => {
+    const expenseToEdit = expenses.find((expense) => expense.id === id);
+    if (expenseToEdit) {
+      setExpenseName(expenseToEdit.name);
+      setExpenseAmount(expenseToEdit.amount);
+      setExpenseCategory(expenseToEdit.category);
+      setEditingId(id);
+    }
+    setVisibleMenuId(null); // Close the settings menu
   };
 
-  const handleSaveEdit = (e) => {
-    e.preventDefault();
-    const updatedExpenses = expenses.map((expense, index) =>
-      index === isEditing
-        ? {
-            name: expenseName,
-            amount: parseFloat(expenseAmount),
-            frequency: expenseFrequency,
-          }
-        : expense
-    );
-    setExpenses(updatedExpenses);
-    setExpenseName("");
-    setExpenseAmount(0);
-    setExpenseFrequency("monthly");
-    setIsEditing(null);
+  const handleDeleteExpense = (id) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
+    setVisibleMenuId(null); // Close the settings menu
   };
 
-  const handleDeleteExpense = (index) => {
-    const updatedExpenses = expenses.filter((_, i) => i !== index);
-    setExpenses(updatedExpenses);
+  const getCategoryIcon = (category) => {
+    switch (category) {
+      case "Housing":
+        return faHouse;
+      case "Transportation":
+        return faCar;
+      case "Food":
+        return faUtensils;
+      case "Entertainment":
+        return faFilm;
+      case "Health":
+        return faHeart;
+      case "Savings/Investments":
+        return faPiggyBank;
+      default:
+        return faEllipsisVertical;
+    }
   };
 
   return (
     <div className="fixed-expenses-input">
-      <h2>Fixed Expenses</h2>
-      <form  className="form1" onSubmit={isEditing !== null ? handleSaveEdit : handleAddExpense}>
-        <label>
-          Expense Name:
-          <input
-            type="text"
-            value={expenseName}
-            onChange={(e) => setExpenseName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Amount:
-          <input
-            type="number"
-            value={expenseAmount}
-            onChange={(e) => setExpenseAmount(e.target.value)}
-            min="0"
-            step="0.01"
-            required
-          />
-        </label>
-        <label>
-          Frequency:
-          <select
-            value={expenseFrequency}
-            onChange={(e) => setExpenseFrequency(e.target.value)}
-            required
-          >
-            <option value="monthly">Monthly</option>
-            <option value="weekly">Weekly</option>
-            <option value="bi-weekly">Bi-Weekly</option>
-            <option value="annually">Annually</option>
-          </select>
-        </label>
-        <button type="submit">{isEditing !== null ? "Save Changes" : "Add Expense"}</button>
-        {isEditing !== null && (
-          <button
-            type="button"
-            onClick={() => {
-              setExpenseName("");
-              setExpenseAmount(0);
-              setExpenseFrequency("monthly");
-              setIsEditing(null);
-            }}
-          >
-            Cancel
-          </button>
-        )}
-      </form>
+      <h2>Monthly Expenses</h2>
+      <div className="input-group">
+        <label htmlFor="expense-name">Expense Name:</label>
+        <input
+          type="text"
+          id="expense-name"
+          value={expenseName}
+          onChange={(e) => setExpenseName(e.target.value)}
+          placeholder="e.g., Rent"
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="expense-amount">Amount ($):</label>
+        <input
+          type="number"
+          id="expense-amount"
+          value={expenseAmount}
+          onChange={(e) => setExpenseAmount(e.target.value)}
+          placeholder="e.g., 1200"
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="expense-category">Category:</label>
+        <select
+          id="expense-category"
+          value={expenseCategory}
+          onChange={(e) => setExpenseCategory(e.target.value)}
+        >
+          <option value="Housing">Housing</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Food">Food</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Health">Health</option>
+          <option value="Savings/Investments">Savings/Investments</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <button onClick={handleAddOrEditExpense}>
+        {editingId ? "Save Changes" : "Add Expense"}
+      </button>
 
-      <ul>
-        {expenses.map((expense, index) => (
-          <li key={index}>
-            {expense.name}: ${expense.amount.toFixed(2)} ({expense.frequency})
-            <button onClick={() => handleEditExpense(index)}>Edit</button>
-            <button onClick={() => handleDeleteExpense(index)}>Delete</button>
-          </li>
+      <div className="expense-list">
+        <h3>Current Expenses</h3>
+        {expenses.map((expense) => (
+          <div key={expense.id} className="expense-item">
+            <div className="expense-main">
+              <FontAwesomeIcon
+                icon={getCategoryIcon(expense.category)}
+                style={{ marginRight: "10px" }}
+              />
+              <strong>{expense.name}</strong> - ${expense.amount.toFixed(2)}
+              <FontAwesomeIcon
+                icon={faEllipsisVertical}
+                className="settings-icon"
+                onClick={() =>
+                  setVisibleMenuId(visibleMenuId === expense.id ? null : expense.id)
+                }
+              />
+            </div>
+            {visibleMenuId === expense.id && (
+              <div className="expense-settings">
+                <button onClick={() => handleEditExpense(expense.id)}>Edit</button>
+                <button onClick={() => handleDeleteExpense(expense.id)}>Delete</button>
+              </div>
+            )}
+          </div>
         ))}
-      </ul>
-
-      {/* Total Expenses Display */}
-      <p>
-        <strong>Total Expenses:</strong> ${totalExpenses.toFixed(2)}
-      </p>
+      </div>
     </div>
   );
 };
@@ -132,9 +157,10 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
 FixedExpensesInput.propTypes = {
   expenses: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
-      frequency: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
     })
   ).isRequired,
   setExpenses: PropTypes.func.isRequired,

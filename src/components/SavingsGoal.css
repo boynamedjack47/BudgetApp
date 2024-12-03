@@ -1,0 +1,32 @@
+/* Styles specific to SavingsGoal component */
+.savings-goal {
+    margin: 20px 0;
+  }
+  
+  .savings-goal h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .savings-goal input {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .savings-goal button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .savings-goal button:hover {
+    background-color: #218838;
+  }
+  

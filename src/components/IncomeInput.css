@@ -1,0 +1,38 @@
+/* Styles specific to IncomeInput component */
+.income-input {
+    margin-bottom: 20px;
+  }
+  
+  .income-input h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .income-input label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .income-input input,
+  .income-input select {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .income-input button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .income-input button:hover {
+    background-color: #45a049;
+  }
+  

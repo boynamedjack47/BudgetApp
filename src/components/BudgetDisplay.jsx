@@ -12,17 +12,6 @@ const BudgetDisplay = ({ income, expenses }) => {
   // Calculate remaining income after expenses
   const remainingIncome = breakdown.monthly - totalExpenses;
 
-  // Helper function to determine the background color based on the value
-  const getAmountStyle = (amount) => {
-    return {
-      backgroundColor: amount >= 0 ? "green" : "red",
-      color: "white",
-      padding: "5px",
-      borderRadius: "5px",
-      display: "inline"
-    };
-  };
-
   return (
     <div className="budget-display">
       <h2>Budget Overview</h2>
@@ -43,7 +32,7 @@ const BudgetDisplay = ({ income, expenses }) => {
 
       {/* Fixed Expenses */}
       <div className="expenses-section">
-        <h3>Fixed Expenses</h3>
+        <h3>Expenses</h3>
         {expenses.length > 0 ? (
           <ul>
             {expenses.map((expense, index) => (
@@ -59,11 +48,12 @@ const BudgetDisplay = ({ income, expenses }) => {
 
       {/* Remaining Income After Expenses */}
       <div className="remaining-income-section">
-        <h3>Remaining Income After Expenses</h3>
-        <p style={getAmountStyle(remainingIncome)}>
+        <h3>Income After Expenses</h3>
+        <p className={remainingIncome >= 0 ? "positive-money" : "negative-money"}>
           ${remainingIncome.toFixed(2)}
         </p>
       </div>
+
       <SavingsGoal remainingIncome={remainingIncome} />
     </div>
   );

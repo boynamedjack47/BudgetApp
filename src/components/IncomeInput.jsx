@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+//import './IncomeInput.css';
+
 
 const IncomeInput = ({ setIncome }) => {
   const [type, setType] = useState("hourly");
@@ -35,12 +37,11 @@ const IncomeInput = ({ setIncome }) => {
   };
 
   return (
-    
-    <form onSubmit={handleSubmit}>
-     <h2>Enter Your Income</h2>
+    <form onSubmit={handleSubmit} className="income-input-form">
+      <h2>Enter Your Income</h2>
       <label>
         Type:
-        <select value={type} onChange={(e) => setType(e.target.value)}>
+        <select value={type} onChange={(e) => setType(e.target.value)} className="select-input">
           <option value="hourly">Hourly</option>
           <option value="salary">Salary</option>
         </select>
@@ -54,6 +55,7 @@ const IncomeInput = ({ setIncome }) => {
           min="0"
           step="0.01"
           required
+          className="input-field"
         />
       </label>
       {type === "hourly" && (
@@ -66,10 +68,11 @@ const IncomeInput = ({ setIncome }) => {
             min="0"
             step="1"
             required
+            className="input-field"
           />
         </label>
       )}
-      <button type="submit">Calculate Income</button>
+      <button type="submit" className="submit-button">Calculate Income</button>
     </form>
   );
 };
