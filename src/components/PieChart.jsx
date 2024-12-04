@@ -16,10 +16,26 @@ const PieChart = ({ data }) => {
     ],
   };
 
+  const chartOptions = {
+    plugins: {
+      legend: {
+        position: "right", // Moves the legend to the right of the chart
+        labels: {
+          boxWidth: 20, // Adjusts the size of the color box
+          padding: 10, // Adds spacing between legend items
+          font: {
+            size: 14, // Adjusts the font size for legend labels
+          },
+        },
+      },
+    },
+    maintainAspectRatio: false, // Allows the chart to resize dynamically
+  };
+
   return (
-    <div style={{ width: "50%", margin: "auto" }}>
+    <div style={{ width: "100%", maxWidth: "600px", margin: "auto", height: "320px" }}>
       <h2>Expense Breakdown</h2>
-      <Pie data={chartData} />
+      <Pie data={chartData} options={chartOptions} />
     </div>
   );
 };

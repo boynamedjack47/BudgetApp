@@ -4,7 +4,9 @@ import FixedExpensesInput from "./components/FixedExpensesInput";
 import SavingsGoalInput from "./components/SavingsGoalInput";
 import BudgetDisplay from "./components/BudgetDisplay";
 import SafeToSpend from "./components/SafeToSpend";
-import PieChart from "./components/PieChart"; // Ensure PieChart is imported
+import PieChart from "./components/PieChart";
+import DailyCheckIn from "./components/DailyCheckIn";
+import calculateTotal from "./components/FixedExpensesInput"
 import "./App.css";
 
 function App() {
@@ -25,43 +27,31 @@ function App() {
     return savedGoal ? JSON.parse(savedGoal) : 0;
   });
 
-  const [savingsStrategy, setSavingsStrategy] = useState("Moderate");
-  const [customSavings, setCustomSavings] = useState(50);
+  const [savingsStrategy, setSavingsStrategy] = useState(() => {
+    return localStorage.getItem("savingsStrategy") || "Moderate"; // Default to "Moderate"
+  });
 
-  const handleStrategyChange = (event) => {
-    const value = event.target.value;
-    setSavingsStrategy(value);
-  };
-
-  const handleCustomSavingsChange = (event) => {
-    const customValue = event.target.value;
-    setCustomSavings(customValue);
-  };
+  const [customSavings, setCustomSavings] = useState(() => {
+    const savedCustomSavings = localStorage.getItem("customSavings");
+    return savedCustomSavings ? JSON.parse(savedCustomSavings) : 50; // Default to 50%
+  });
 
   const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
   const remainingIncome = income.breakdown.monthly - totalExpenses;
 
-  useEffect(() => {
-    localStorage.setItem("income", JSON.stringify(income));
-  }, [income]);
+  // Calculate monthly savings based on the strategy
+  const monthlySavings =
+  savingsStrategy === "Custom"
+    ? (remainingIncome * customSavings) / 100
+    : savingsStrategy === "Aggressive"
+    ? remainingIncome
+    : savingsStrategy === "Moderate"
+    ? remainingIncome * 0.5
+    : remainingIncome * 0.25;
 
-  useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
 
-  useEffect(() => {
-    localStorage.setItem("savingsGoal", JSON.stringify(savingsGoal));
-  }, [savingsGoal]);
 
-  
-  useEffect(() => {
-    localStorage.setItem("savingsStrategy", savingsStrategy); // Store as plain string
-  }, [savingsStrategy]);
-  
-  useEffect(() => {
-    localStorage.setItem("customSavings", JSON.stringify(customSavings)); // Store as JSON
-  }, [customSavings]);
-
+  // Calculate pie chart data from expenses
   const pieChartData = expenses.reduce((acc, expense) => {
     const category = expense.category || "Other";
     const existingCategory = acc.find((item) => item.label === category);
@@ -75,13 +65,71 @@ function App() {
     return acc;
   }, []);
 
+  // Function to calculate how much money is safe to spend based on the savings strategy
+  const safeToSpendAmount = () => {
+    const dailyBudget =
+      remainingIncome /
+      30 *
+      (savingsStrategy === "Custom"
+        ? customSavings / 100
+        : savingsStrategy === "Aggressive"
+        ? 1
+        : savingsStrategy === "Moderate"
+        ? 0.5
+        : 0.25);
+
+    return dailyBudget;
+  };
+
+  // Handlers for saving strategy and custom savings
+  const handleStrategyChange = (event) => {
+    const value = event.target.value;
+    setSavingsStrategy(value);
+  };
+
+  const handleCustomSavingsChange = (event) => {
+    const customValue = event.target.value;
+    setCustomSavings(customValue);
+  };
+
+  // Save states to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("income", JSON.stringify(income));
+  }, [income]);
+
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
+
+  useEffect(() => {
+    localStorage.setItem("savingsGoal", JSON.stringify(savingsGoal));
+  }, [savingsGoal]);
+
+  useEffect(() => {
+    localStorage.setItem("savingsStrategy", savingsStrategy);
+  }, [savingsStrategy]);
+
+  useEffect(() => {
+    localStorage.setItem("customSavings", JSON.stringify(customSavings));
+  }, [customSavings]);
+
   return (
     <div className="App">
       <div className="content">
         <h1>Budget Tracker</h1>
-        <IncomeInput setIncome={setIncome} />
-        <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} />
-        <BudgetDisplay income={income} expenses={expenses} savingsGoal={savingsGoal} />
+        <div className="incomeinput">
+        <IncomeInput setIncome={setIncome} /> </div>
+        <div className="expenseinput">
+          <div className="maincontent">
+        <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} /> </div>
+        <BudgetDisplay
+          income={income}
+          expenses={expenses}
+          remainingIncome={remainingIncome}
+          monthlySavings={monthlySavings}
+          
+        />
+        </div>
         <div>
           <label htmlFor="strategy">Select Savings Strategy: </label>
           <select id="strategy" value={savingsStrategy} onChange={handleStrategyChange}>
@@ -105,15 +153,17 @@ function App() {
             <span>%</span>
           </div>
         )}
+       
       </div>
 
-      {/* Group SafeToSpend and PieChart in the same div */}
+      {/* SafeToSpend, PieChart, and DailyCheckIn */}
       <div className="safe-to-spend-container">
         <SafeToSpend
           remainingIncome={remainingIncome}
           savingsStrategy={savingsStrategy === "Custom" ? customSavings / 100 : savingsStrategy === "Aggressive" ? 1 : savingsStrategy === "Moderate" ? 0.5 : 0.25}
         />
         <PieChart data={pieChartData} />
+        <DailyCheckIn safeToSpendAmount={safeToSpendAmount} />
       </div>
     </div>
   );

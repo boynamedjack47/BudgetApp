@@ -53,7 +53,7 @@
   
   .expense-item {
     display: flex;
-    
+    justify-content: center;
     align-items: center;
     
     
@@ -61,7 +61,7 @@
   }
   
   button {
-    background-color: #green;
+    background-color: green;
     padding: 5px 10px;
     border-radius: 5px;
     color: white;
@@ -100,4 +100,7 @@
   }
   
   
-  
+  .expenseinput {
+    display: flex;
+    justify-content: center;
+  }

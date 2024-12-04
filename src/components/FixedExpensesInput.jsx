@@ -11,6 +11,11 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
   const [editingId, setEditingId] = useState(null); // Track currently editing expense
   const [visibleMenuId, setVisibleMenuId] = useState(null); // Track which settings menu is open
 
+  // Function to calculate total expenses
+  const calculateTotal = () => {
+    return expenses.reduce((total, expense) => total + expense.amount, 0);
+  };
+
   const handleAddOrEditExpense = () => {
     if (expenseName && expenseAmount) {
       if (editingId) {
@@ -83,6 +88,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
   return (
     <div className="fixed-expenses-input">
       <h2>Monthly Expenses</h2>
+      <div className="expenseinput">
       <div className="input-group">
         <label htmlFor="expense-name">Expense Name:</label>
         <input
@@ -122,6 +128,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
       <button onClick={handleAddOrEditExpense}>
         {editingId ? "Save Changes" : "Add Expense"}
       </button>
+      </div>
 
       <div className="expense-list">
         <h3>Current Expenses</h3>
@@ -149,6 +156,11 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
             )}
           </div>
         ))}
+      </div>
+
+      {/* Display the total cost of all expenses */}
+      <div className="total-expenses">
+        <h4>Total Expenses: ${calculateTotal().toFixed(2)}</h4>
       </div>
     </div>
   );

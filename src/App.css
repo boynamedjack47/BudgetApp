@@ -64,7 +64,7 @@ li {
 
 .budget-display {
   display: flex;
- 
+ flex-direction: column;
   justify-content: center;
  
   
@@ -195,6 +195,9 @@ li {
 .expenses-section,
 .remaining-income-section {
   margin-bottom: 20px;
+}
+.expenses-section{
+  display: none;
 }
 
 .income-section p,

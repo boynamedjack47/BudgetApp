@@ -1,16 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SavingsGoal from "./SavingsGoalInput"; // Adjust the path if necessary
 
-
-const BudgetDisplay = ({ income, expenses }) => {
+const BudgetDisplay = ({ income, expenses, remainingIncome, monthlySavings }) => {
   const { breakdown } = income;
 
   // Calculate total expenses
   const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
-
-  // Calculate remaining income after expenses
-  const remainingIncome = breakdown.monthly - totalExpenses;
 
   return (
     <div className="budget-display">
@@ -54,7 +49,11 @@ const BudgetDisplay = ({ income, expenses }) => {
         </p>
       </div>
 
-      <SavingsGoal remainingIncome={remainingIncome} />
+      {/* Monthly Savings */}
+      <div className="monthly-savings-section">
+        <h3>Monthly Savings</h3>
+        <p>${monthlySavings.toFixed(2)}</p>
+      </div>
     </div>
   );
 };
@@ -76,6 +75,8 @@ BudgetDisplay.propTypes = {
       frequency: PropTypes.string.isRequired,
     })
   ).isRequired,
+  remainingIncome: PropTypes.number.isRequired,  // Remaining income passed as a prop
+  monthlySavings: PropTypes.number.isRequired,  // Monthly savings passed as a prop
 };
 
 export default BudgetDisplay;
