@@ -6,7 +6,8 @@ import BudgetDisplay from "./components/BudgetDisplay";
 import SafeToSpend from "./components/SafeToSpend";
 import PieChart from "./components/PieChart";
 import DailyCheckIn from "./components/DailyCheckIn";
-import calculateTotal from "./components/FixedExpensesInput"
+import SavingsGoalSetter from "./components/SavingsGoalSetter";
+
 import "./App.css";
 
 function App() {
@@ -128,7 +129,9 @@ function App() {
           remainingIncome={remainingIncome}
           monthlySavings={monthlySavings}
           
-        />
+
+          ></BudgetDisplay>
+
         </div>
         <div>
           <label htmlFor="strategy">Select Savings Strategy: </label>
