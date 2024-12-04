@@ -266,3 +266,12 @@ display: flex;
 .income-input-form .submit-button:hover {
   background-color: #45a049;
 }
+
+.monthly-savings-section p {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: inline;
+  font-weight: bold;
+}

@@ -45,7 +45,9 @@
   }
   
   .expense-list {
-  
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -61,7 +63,7 @@
   }
   
   button {
-    background-color: green;
+    background-color: 4CAF50;
     padding: 5px 10px;
     border-radius: 5px;
     color: white;
@@ -93,7 +95,7 @@
     width: 100%;
     padding: 5px;
     font-size: 14px;
-    background-color: green;
+    background-color: 4CAF50;
     color: white;
     border: none;
     border-radius: 4px;

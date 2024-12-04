@@ -6,7 +6,7 @@ import BudgetDisplay from "./components/BudgetDisplay";
 import SafeToSpend from "./components/SafeToSpend";
 import PieChart from "./components/PieChart";
 import DailyCheckIn from "./components/DailyCheckIn";
-import SavingsGoalSetter from "./components/SavingsGoalSetter";
+
 
 import "./App.css";
 
@@ -42,15 +42,13 @@ function App() {
 
   // Calculate monthly savings based on the strategy
   const monthlySavings =
-  savingsStrategy === "Custom"
-    ? (remainingIncome * customSavings) / 100
-    : savingsStrategy === "Aggressive"
-    ? remainingIncome
-    : savingsStrategy === "Moderate"
-    ? remainingIncome * 0.5
-    : remainingIncome * 0.25;
-
-
+    savingsStrategy === "Custom"
+      ? (remainingIncome * customSavings) / 100
+      : savingsStrategy === "Aggressive"
+      ? remainingIncome
+      : savingsStrategy === "Moderate"
+      ? remainingIncome * 0.5
+      : remainingIncome * 0.25;
 
   // Calculate pie chart data from expenses
   const pieChartData = expenses.reduce((acc, expense) => {
@@ -68,16 +66,18 @@ function App() {
 
   // Function to calculate how much money is safe to spend based on the savings strategy
   const safeToSpendAmount = () => {
-    const dailyBudget =
-      remainingIncome /
-      30 *
-      (savingsStrategy === "Custom"
+    const savingsMultiplier =
+      savingsStrategy === "Custom"
         ? customSavings / 100
         : savingsStrategy === "Aggressive"
         ? 1
         : savingsStrategy === "Moderate"
         ? 0.5
-        : 0.25);
+        : 0.25;
+
+    const savingsAmount = remainingIncome * savingsMultiplier;
+    const safeAmount = remainingIncome - savingsAmount;
+    const dailyBudget = safeAmount / 30;
 
     return dailyBudget;
   };
@@ -119,20 +119,29 @@ function App() {
       <div className="content">
         <h1>Budget Tracker</h1>
         <div className="incomeinput">
-        <IncomeInput setIncome={setIncome} /> </div>
+          <IncomeInput setIncome={setIncome} />
+        </div>
         <div className="expenseinput">
           <div className="maincontent">
-        <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} /> </div>
-        <BudgetDisplay
-          income={income}
-          expenses={expenses}
+            <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} />
+          </div>
+          <BudgetDisplay
+            income={income}
+            expenses={expenses}
+            remainingIncome={remainingIncome}
+            monthlySavings={monthlySavings}
+          />
+        </div>
+
+        {/* Savings Goal Input Component */}
+        <SavingsGoalInput
+          savingsGoal={savingsGoal}
+          savingsStrategy={savingsStrategy}
           remainingIncome={remainingIncome}
           monthlySavings={monthlySavings}
-          
+          setSavingsGoal={setSavingsGoal} // Pass the state setter to allow updates
+        />
 
-          ></BudgetDisplay>
-
-        </div>
         <div>
           <label htmlFor="strategy">Select Savings Strategy: </label>
           <select id="strategy" value={savingsStrategy} onChange={handleStrategyChange}>
@@ -142,6 +151,7 @@ function App() {
             <option value="Custom">Custom</option>
           </select>
         </div>
+
         {savingsStrategy === "Custom" && (
           <div>
             <label htmlFor="customSavings">Enter Custom Savings %: </label>
@@ -156,7 +166,6 @@ function App() {
             <span>%</span>
           </div>
         )}
-       
       </div>
 
       {/* SafeToSpend, PieChart, and DailyCheckIn */}

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./DailyCheckIn.css";
 
-
-const DailyCheckIn = ({ safeToSpendAmount }) => {
+const DailyCheckIn = ({ safeToSpendAmount, customSavings }) => {
   const [dailyBudget, setDailyBudget] = useState(0);
   const [spentYesterday, setSpentYesterday] = useState("");
   const [streak, setStreak] = useState(() => {
@@ -15,9 +14,14 @@ const DailyCheckIn = ({ safeToSpendAmount }) => {
   });
 
   useEffect(() => {
+    // Flip logic for custom savings
     const budget = safeToSpendAmount();
-    setDailyBudget(budget ? parseFloat(budget.toFixed(2)) : 0);
-  }, [safeToSpendAmount]);
+    const adjustedBudget = customSavings
+      ? budget * (1 - customSavings / 100) // Flip custom savings here (subtract savings from total)
+      : budget;
+
+    setDailyBudget(adjustedBudget ? parseFloat(adjustedBudget.toFixed(2)) : 0);
+  }, [safeToSpendAmount, customSavings])
 
   const isCheckInAllowed = () => {
     const today = new Date().toISOString().split("T")[0]; // Get only the date part (YYYY-MM-DD)
