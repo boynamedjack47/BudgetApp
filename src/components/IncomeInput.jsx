@@ -2,29 +2,38 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 //import './IncomeInput.css';
 
-
 const IncomeInput = ({ setIncome }) => {
   const [type, setType] = useState("hourly");
   const [amount, setAmount] = useState(0);
   const [hours, setHours] = useState(40);
+  const [overtimeInfo, setOvertimeInfo] = useState(null); // To display overtime breakdown
+  const [showOvertime, setShowOvertime] = useState(false); // Toggle overtime details visibility
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     let annualIncome;
+    let overtimeHours = 0;
+    let regularHours = hours;
 
+    // Calculate income based on hourly or salary type
     if (type === "hourly") {
-      const regularHours = Math.min(hours, 40);
-      const overtimeHours = Math.max(hours - 40, 0);
+      // If hours are above 40, calculate overtime
+      if (hours > 40) {
+        regularHours = 40; // Regular hours are capped at 40
+        overtimeHours = hours - 40; // Overtime hours
+      }
       const weeklyIncome = regularHours * amount + overtimeHours * amount * 1.5;
       annualIncome = weeklyIncome * 52; // 52 weeks in a year
     } else {
       annualIncome = amount; // Annual salary
     }
 
+    // Breakdown for monthly and bi-weekly income
     const monthlyIncome = annualIncome / 12;
     const biWeeklyIncome = annualIncome / 26;
 
+    // Set the income state and include overtime information if applicable
     setIncome({
       type,
       amount: annualIncome,
@@ -34,6 +43,21 @@ const IncomeInput = ({ setIncome }) => {
         biweekly: biWeeklyIncome.toFixed(2),
       },
     });
+
+    // Update overtime display information
+    if (overtimeHours > 0) {
+      setOvertimeInfo({
+        regularHours,
+        overtimeHours,
+        overtimeIncome: (overtimeHours * amount * 1.5).toFixed(2),
+      });
+    } else {
+      setOvertimeInfo(null); // No overtime if hours <= 40
+    }
+  };
+
+  const toggleOvertimeVisibility = () => {
+    setShowOvertime((prevState) => !prevState); // Toggle visibility of overtime info
   };
 
   return (
@@ -73,6 +97,23 @@ const IncomeInput = ({ setIncome }) => {
         </label>
       )}
       <button type="submit" className="submit-button">Calculate Income</button>
+
+      {/* Button to toggle overtime info visibility */}
+      {overtimeInfo && (
+        <button type="button" onClick={toggleOvertimeVisibility} className="toggle-overtime-button">
+          {showOvertime ? "Hide Overtime Info" : "? Overtime Info"}
+        </button>
+      )}
+
+      {/* Overtime Information, visible when the button is clicked */}
+      {showOvertime && overtimeInfo && (
+        <div className="overtime-info">
+          <h3>Overtime Details:</h3>
+          <p>Regular Hours: {overtimeInfo.regularHours} hours</p>
+          <p>Overtime Hours: {overtimeInfo.overtimeHours} hours</p>
+          <p>Overtime Income: ${overtimeInfo.overtimeIncome}</p>
+        </div>
+      )}
     </form>
   );
 };

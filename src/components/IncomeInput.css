@@ -35,4 +35,20 @@
   .income-input button:hover {
     background-color: #45a049;
   }
+
+  .toggle-overtime-button {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .toggle-overtime-button:hover {
+    background-color: #45a049;
+  }
+  
   

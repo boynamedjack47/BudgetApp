@@ -130,17 +130,12 @@ function App() {
             expenses={expenses}
             remainingIncome={remainingIncome}
             monthlySavings={monthlySavings}
+            
           />
         </div>
 
-        {/* Savings Goal Input Component */}
-        <SavingsGoalInput
-          savingsGoal={savingsGoal}
-          savingsStrategy={savingsStrategy}
-          remainingIncome={remainingIncome}
-          monthlySavings={monthlySavings}
-          setSavingsGoal={setSavingsGoal} // Pass the state setter to allow updates
-        />
+     
+        
 
         <div>
           <label htmlFor="strategy">Select Savings Strategy: </label>

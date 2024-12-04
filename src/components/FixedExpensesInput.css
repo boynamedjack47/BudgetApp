@@ -47,7 +47,7 @@
   .expense-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
     text-align: center;
     align-items: center;
     justify-content: center;

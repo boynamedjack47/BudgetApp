@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const SavingsGoalInput = ({ savingsGoal, savingsStrategy, remainingIncome, monthlySavings }) => {
-  const [isEditing, setIsEditing] = useState(!savingsGoal);
-  const [goal, setGoal] = useState(savingsGoal);
+const SavingsGoalInput = ({ savingsStrategy, remainingIncome, monthlySavings }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [goal, setGoal] = useState(localStorage.getItem("savingsGoal") || ""); // Retrieve from localStorage
   const [monthsToGoal, setMonthsToGoal] = useState(null);
 
   // Calculate how long it would take to reach the savings goal
@@ -13,6 +13,13 @@ const SavingsGoalInput = ({ savingsGoal, savingsStrategy, remainingIncome, month
       setMonthsToGoal(months);
     }
   }, [remainingIncome, goal, monthlySavings]);
+
+  // Save to localStorage whenever the goal changes
+  useEffect(() => {
+    if (goal) {
+      localStorage.setItem("savingsGoal", goal); // Save goal to localStorage
+    }
+  }, [goal]);
 
   const handleSave = () => {
     if (goal !== "" && parseFloat(goal) > 0) {
@@ -25,9 +32,10 @@ const SavingsGoalInput = ({ savingsGoal, savingsStrategy, remainingIncome, month
   };
 
   const handleDelete = () => {
-    setGoal("");
+    setGoal("");  // Clear the goal
     setMonthsToGoal(null);
     setIsEditing(true);
+    localStorage.removeItem("savingsGoal"); // Remove goal from localStorage
   };
 
   return (
@@ -51,9 +59,7 @@ const SavingsGoalInput = ({ savingsGoal, savingsStrategy, remainingIncome, month
       ) : (
         <div>
           <p>Current Savings Goal: ${parseFloat(goal).toFixed(2)}</p>
-          <p>
-            Strategy: {savingsStrategy} : ${monthlySavings ? monthlySavings.toFixed(2) : "0.00"} per month
-          </p>
+      
           <p>
             Months to Reach Goal: {monthsToGoal ? `${monthsToGoal} months` : "N/A"}
           </p>
@@ -66,7 +72,6 @@ const SavingsGoalInput = ({ savingsGoal, savingsStrategy, remainingIncome, month
 };
 
 SavingsGoalInput.propTypes = {
-  savingsGoal: PropTypes.number.isRequired,
   savingsStrategy: PropTypes.string.isRequired,
   remainingIncome: PropTypes.number.isRequired,
   monthlySavings: PropTypes.number.isRequired,
