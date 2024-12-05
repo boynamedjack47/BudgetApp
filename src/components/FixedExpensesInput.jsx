@@ -8,6 +8,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
   const [expenseName, setExpenseName] = useState("");
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("Housing");
+  const [expenseDueDay, setExpenseDueDay] = useState(""); // New state for due day
   const [editingId, setEditingId] = useState(null); // Track currently editing expense
   const [visibleMenuId, setVisibleMenuId] = useState(null); // Track which settings menu is open
 
@@ -17,7 +18,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
   };
 
   const handleAddOrEditExpense = () => {
-    if (expenseName && expenseAmount) {
+    if (expenseName && expenseAmount && expenseDueDay) {
       if (editingId) {
         // Update existing expense
         setExpenses(
@@ -28,6 +29,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
                   name: expenseName,
                   amount: parseFloat(expenseAmount),
                   category: expenseCategory,
+                  dueDay: parseInt(expenseDueDay), // Update due day
                 }
               : expense
           )
@@ -40,6 +42,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
           name: expenseName,
           amount: parseFloat(expenseAmount),
           category: expenseCategory,
+          dueDay: parseInt(expenseDueDay), // Add due day
         };
         setExpenses([...expenses, newExpense]);
       }
@@ -47,6 +50,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
       setExpenseName("");
       setExpenseAmount("");
       setExpenseCategory("Housing");
+      setExpenseDueDay(""); // Reset due day field
     }
   };
 
@@ -56,6 +60,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
       setExpenseName(expenseToEdit.name);
       setExpenseAmount(expenseToEdit.amount);
       setExpenseCategory(expenseToEdit.category);
+      setExpenseDueDay(expenseToEdit.dueDay); // Populate due day
       setEditingId(id);
     }
     setVisibleMenuId(null); // Close the settings menu
@@ -89,45 +94,57 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
     <div className="fixed-expenses-input">
       <h2>Monthly Expenses</h2>
       <div className="expenseinput">
-      <div className="input-group">
-        <label htmlFor="expense-name">Expense Name:</label>
-        <input
-          type="text"
-          id="expense-name"
-          value={expenseName}
-          onChange={(e) => setExpenseName(e.target.value)}
-          placeholder="e.g., Rent"
-        />
-      </div>
-      <div className="input-group">
-        <label htmlFor="expense-amount">Amount ($):</label>
-        <input
-          type="number"
-          id="expense-amount"
-          value={expenseAmount}
-          onChange={(e) => setExpenseAmount(e.target.value)}
-          placeholder="e.g., 1200"
-        />
-      </div>
-      <div className="input-group">
-        <label htmlFor="expense-category">Category:</label>
-        <select
-          id="expense-category"
-          value={expenseCategory}
-          onChange={(e) => setExpenseCategory(e.target.value)}
-        >
-          <option value="Housing">Housing</option>
-          <option value="Transportation">Transportation</option>
-          <option value="Food">Food</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Health">Health</option>
-          <option value="Savings/Investments">Savings/Investments</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <button onClick={handleAddOrEditExpense}>
-        {editingId ? "Save Changes" : "Add Expense"}
-      </button>
+        <div className="input-group">
+          <label htmlFor="expense-name">Expense Name:</label>
+          <input
+            type="text"
+            id="expense-name"
+            value={expenseName}
+            onChange={(e) => setExpenseName(e.target.value)}
+            placeholder="e.g., Rent"
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="expense-amount">Amount ($):</label>
+          <input
+            type="number"
+            id="expense-amount"
+            value={expenseAmount}
+            onChange={(e) => setExpenseAmount(e.target.value)}
+            placeholder="e.g., 1200"
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="expense-category">Category:</label>
+          <select
+            id="expense-category"
+            value={expenseCategory}
+            onChange={(e) => setExpenseCategory(e.target.value)}
+          >
+            <option value="Housing">Housing</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Food">Food</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Health">Health</option>
+            <option value="Savings/Investments">Savings/Investments</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div className="input-group">
+          <label htmlFor="expense-due-day">Due Date:</label>
+          <input
+            type="number"
+            id="expense-due-day"
+            value={expenseDueDay}
+            onChange={(e) => setExpenseDueDay(e.target.value)}
+            placeholder="e.g., 1 (for the 1st of the month)"
+            min="1"
+            max="31"
+          />
+        </div>
+        <button onClick={handleAddOrEditExpense}>
+          {editingId ? "Save Changes" : "Add Expense"}
+        </button>
       </div>
 
       <div className="expense-list">
@@ -139,7 +156,8 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
                 icon={getCategoryIcon(expense.category)}
                 style={{ marginRight: "10px" }}
               />
-              <strong>{expense.name}</strong> - ${expense.amount.toFixed(2)}
+              <strong>{expense.name}</strong> - ${expense.amount.toFixed(2)} (Due: Day{" "}
+              {expense.dueDay})
               <FontAwesomeIcon
                 icon={faEllipsisVertical}
                 className="settings-icon"
@@ -173,6 +191,7 @@ FixedExpensesInput.propTypes = {
       name: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
       category: PropTypes.string.isRequired,
+      dueDay: PropTypes.number.isRequired, // Include due day in prop types
     })
   ).isRequired,
   setExpenses: PropTypes.func.isRequired,

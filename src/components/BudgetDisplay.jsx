@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SavingsGoalInput from "./SavingsGoalInput"; // Import the SavingsGoalInput component
-
+import "./BudgetDisplay.css"
 const BudgetDisplay = ({ income, expenses, remainingIncome, monthlySavings, savingsGoal, savingsStrategy }) => {
   const { breakdown } = income;
 
   // Calculate total expenses
   const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+
+  // Additional savings breakdown calculations
+  const biWeeklySavings = monthlySavings / 2; // Approximation: 1 month ≈ 2 paychecks
+  const dailySavings = monthlySavings / 30; // Approximation: 1 month ≈ 30 days
 
   return (
     <div className="budget-display">
@@ -52,8 +56,19 @@ const BudgetDisplay = ({ income, expenses, remainingIncome, monthlySavings, savi
 
       {/* Monthly Savings */}
       <div className="monthly-savings-section">
-        <h3>Monthly Savings</h3>
-        <p>${monthlySavings.toFixed(2)}</p>
+        <h3>Savings Breakdown</h3>
+        <div className="savingsbreakdown">
+  <p>
+    Monthly Savings: <span className="savings-amount">${monthlySavings.toFixed(2)}</span>
+  </p>
+  <p>
+    Bi-Weekly Savings (per paycheck): <span className="savings-amount">${biWeeklySavings.toFixed(2)}</span>
+  </p>
+  <p>
+    Daily Savings: <span className="savings-amount">${dailySavings.toFixed(2)}</span>
+  </p>
+</div>
+
       </div>
 
       {/* Optional: Show total expenses 

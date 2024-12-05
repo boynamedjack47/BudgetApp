@@ -6,6 +6,8 @@ import BudgetDisplay from "./components/BudgetDisplay";
 import SafeToSpend from "./components/SafeToSpend";
 import PieChart from "./components/PieChart";
 import DailyCheckIn from "./components/DailyCheckIn";
+import DueDateComponent from "./components/DueDate";
+
 
 
 import "./App.css";
@@ -165,13 +167,30 @@ function App() {
 
       {/* SafeToSpend, PieChart, and DailyCheckIn */}
       <div className="safe-to-spend-container">
-        <SafeToSpend
-          remainingIncome={remainingIncome}
-          savingsStrategy={savingsStrategy === "Custom" ? customSavings / 100 : savingsStrategy === "Aggressive" ? 1 : savingsStrategy === "Moderate" ? 0.5 : 0.25}
-        />
-        <PieChart data={pieChartData} />
-        <DailyCheckIn safeToSpendAmount={safeToSpendAmount} />
-      </div>
+  {/* Display remaining income */}
+  <SafeToSpend
+    remainingIncome={remainingIncome}
+    savingsStrategy={
+      savingsStrategy === "Custom"
+        ? customSavings / 100
+        : savingsStrategy === "Aggressive"
+        ? 1
+        : savingsStrategy === "Moderate"
+        ? 0.5
+        : 0.25
+    }
+  />
+
+  {/* Expense Distribution Pie Chart */}
+  <PieChart data={pieChartData} />
+
+  {/* Daily Check-In Section */}
+  <DailyCheckIn safeToSpendAmount={safeToSpendAmount} />
+
+  {/* Upcoming Expenses Component */}
+  <DueDateComponent expenses={expenses} /> {/* New Component */}
+</div>
+
     </div>
   );
 }
