@@ -4,6 +4,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faCar, faUtensils, faFilm, faHeart, faPiggyBank, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import './DueDate.css';
 
+// Function to get the ordinal suffix
+const getOrdinalSuffix = (day) => {
+  const suffixes = ["th", "st", "nd", "rd"];
+  const lastDigit = day % 10;
+  const lastTwoDigits = day % 100;
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
+    return day + "th";
+  }
+  return day + (suffixes[lastDigit] || "th");
+};
+
 const DueDateComponent = ({ expenses }) => {
   const today = new Date();
   const currentDay = today.getDate();
@@ -40,6 +51,10 @@ const DueDateComponent = ({ expenses }) => {
     }
   };
 
+  const calculateTotalUpcomingExpenses = () => {
+    return upcomingExpenses.reduce((total, expense) => total + expense.amount, 0);
+  };
+
   return (
     <div className="due-date-component">
       <h2>Upcoming Expenses</h2>
@@ -52,13 +67,16 @@ const DueDateComponent = ({ expenses }) => {
                 style={{ marginRight: "10px" }}
               />
               <strong>{expense.name}</strong> - ${expense.amount.toFixed(2)} (Due: The{" "}
-              {expense.dueDay}th)
+              {getOrdinalSuffix(expense.dueDay)})
             </div>
           ))}
         </div>
       ) : (
         <p>No upcoming expenses within the next 7 days.</p>
       )}
+      <div className="total-upcoming-expenses">
+        <h4>Total Upcoming Expenses: ${calculateTotalUpcomingExpenses().toFixed(2)}</h4>
+      </div>
     </div>
   );
 };

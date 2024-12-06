@@ -33,10 +33,12 @@ const PieChart = ({ data }) => {
   };
 
   return (
-    <div style={{ width: "80%", maxWidth: "600px", margin: "auto", height: "320px" }}>
-      <h2>Expense Breakdown</h2>
-      <Pie data={chartData} options={chartOptions} />
-    </div>
+    <>
+      <div style={{ width: "80%", maxWidth: "600px", margin: "auto", height: "275px" }}>
+        <h2>Expense Breakdown</h2> {/* Place the header before the Pie chart */}
+        <Pie data={chartData} options={chartOptions} />
+      </div>
+    </>
   );
 };
 

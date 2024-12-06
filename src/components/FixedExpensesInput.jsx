@@ -17,6 +17,19 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
     return expenses.reduce((total, expense) => total + expense.amount, 0);
   };
 
+  // Function to get the correct ordinal suffix
+  const getOrdinalSuffix = (day) => {
+    if (day === 1 || day === 21 || day === 31) {
+      return `${day}st`;
+    } else if (day === 2 || day === 22) {
+      return `${day}nd`;
+    } else if (day === 3 || day === 23) {
+      return `${day}rd`;
+    } else {
+      return `${day}th`;
+    }
+  };
+
   const handleAddOrEditExpense = () => {
     if (expenseName && expenseAmount && expenseDueDay) {
       if (editingId) {
@@ -156,8 +169,10 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
                 icon={getCategoryIcon(expense.category)}
                 style={{ marginRight: "10px" }}
               />
-              <strong>{expense.name}</strong> - ${expense.amount.toFixed(2)} (Due: Day{" "}
-              {expense.dueDay})
+              <strong>{expense.name}</strong> - ${expense.amount.toFixed(2)} 
+              {expense.dueDay && (
+                <span> (Due: The {getOrdinalSuffix(expense.dueDay)})</span>
+              )}
               <FontAwesomeIcon
                 icon={faEllipsisVertical}
                 className="settings-icon"

@@ -168,28 +168,37 @@ function App() {
       {/* SafeToSpend, PieChart, and DailyCheckIn */}
       <div className="safe-to-spend-container">
   {/* Display remaining income */}
-  <SafeToSpend
-    remainingIncome={remainingIncome}
-    savingsStrategy={
-      savingsStrategy === "Custom"
-        ? customSavings / 100
-        : savingsStrategy === "Aggressive"
-        ? 1
-        : savingsStrategy === "Moderate"
-        ? 0.5
-        : 0.25
-    }
-  />
+  <div>
+    <SafeToSpend
+      remainingIncome={remainingIncome}
+      savingsStrategy={
+        savingsStrategy === "Custom"
+          ? customSavings / 100
+          : savingsStrategy === "Aggressive"
+          ? 1
+          : savingsStrategy === "Moderate"
+          ? 0.5
+          : 0.25
+      }
+    />
+  </div>
 
   {/* Expense Distribution Pie Chart */}
-  <PieChart data={pieChartData} />
+  <div>
+    <PieChart data={pieChartData} />
+  </div>
 
   {/* Daily Check-In Section */}
-  <DailyCheckIn safeToSpendAmount={safeToSpendAmount} />
+  <div>
+    <DailyCheckIn safeToSpendAmount={safeToSpendAmount} />
+  </div>
 
   {/* Upcoming Expenses Component */}
-  <DueDateComponent expenses={expenses} /> {/* New Component */}
+  <div>
+    <DueDateComponent expenses={expenses} />
+  </div>
 </div>
+
 
     </div>
   );

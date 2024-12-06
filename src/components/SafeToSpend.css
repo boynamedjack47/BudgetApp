@@ -9,7 +9,6 @@
   .safe-to-spend h2 {
     font-size: 24px;
     color: #333;
-    margin-bottom: 10px;
   }
   
   .amount {
@@ -51,7 +50,7 @@
     background-color: #e0e0e0;
     border-radius: 10px;
     overflow: hidden;
-    margin-top: 20px;
+    margin-top: 0px;
   }
   
   .progress-bar {
@@ -78,6 +77,6 @@
   p {
     font-size: 14px;
     color: #555;
-    margin-top: 20px;
+    margin-top: 0px;
   }
   
