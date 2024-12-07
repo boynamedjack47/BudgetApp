@@ -7,6 +7,7 @@ import SafeToSpend from "./components/SafeToSpend";
 import PieChart from "./components/PieChart";
 import DailyCheckIn from "./components/DailyCheckIn";
 import DueDateComponent from "./components/DueDate";
+import NavBar from "./components/NavBar";
 
 
 
