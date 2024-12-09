@@ -8,7 +8,7 @@ import PieChart from "./components/PieChart";
 import DailyCheckIn from "./components/DailyCheckIn";
 import DueDateComponent from "./components/DueDate";
 import NavBar from "./components/NavBar";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import "./App.css";
@@ -164,10 +164,10 @@ function App() {
             <span>%</span>
           </div>
         )}
-      </div>
 
-      {/* SafeToSpend, PieChart, and DailyCheckIn */}
-      <div className="safe-to-spend-container">
+      </div>
+       {/* SafeToSpend, PieChart, and DailyCheckIn */}
+  <div className="safe-to-spend-container">
   {/* Display remaining income */}
   <div>
     <SafeToSpend
@@ -199,6 +199,8 @@ function App() {
     <DueDateComponent expenses={expenses} />
   </div>
 </div>
+
+    
 
 
     </div>

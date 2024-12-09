@@ -6,7 +6,6 @@
   padding: 20px;
   max-width: 400px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 0 auto; /* Center the container */
 }
 
 .daily-check-in h3 {
@@ -68,104 +67,4 @@
   border-radius: 5px;
   text-align: center;
   font-size: 1rem;
-}
-
-/* Mobile-First Responsive Design */
-
-/* For small screens (up to 480px) */
-@media (max-width: 480px) {
-  .daily-check-in {
-    padding: 15px; /* Reduce padding */
-    width: 90%; /* Ensure full width on smaller screens */
-    margin: 0 auto; /* Center the container */
-  }
-
-  .daily-check-in h3 {
-    font-size: 1.25rem; /* Slightly smaller font */
-  }
-
-  .daily-check-in p {
-    font-size: 0.9rem; /* Adjust font size */
-  }
-
-  .daily-check-in input {
-    font-size: 0.9rem; /* Slightly smaller font */
-    padding: 8px; /* Adjust padding */
-  }
-
-  .daily-check-in button {
-    font-size: 0.9rem; /* Slightly smaller font */
-    padding: 8px 12px; /* Adjust padding */
-  }
-
-  .daily-check-in .streak {
-    font-size: 1rem; /* Adjust font size */
-    padding: 8px;
-  }
-
-  .daily-check-in .message {
-    font-size: 0.9rem; /* Adjust font size */
-    padding: 8px;
-  }
-}
-
-/* For medium screens (480px to 768px) */
-@media (max-width: 768px) {
-  .daily-check-in {
-    width: 85%; /* More space for medium screens */
-  }
-
-  .daily-check-in h3 {
-    font-size: 1.4rem; /* Adjust font size */
-  }
-
-  .daily-check-in p {
-    font-size: 1rem; /* Keep the font size at a comfortable level */
-  }
-
-  .daily-check-in input {
-    font-size: 1rem; /* Maintain font size */
-    padding: 10px; /* Maintain padding */
-  }
-
-  .daily-check-in button {
-    font-size: 1rem; /* Maintain font size */
-    padding: 10px 15px; /* Keep padding consistent */
-  }
-
-  .daily-check-in .streak {
-    font-size: 1.1rem; /* Adjust font size for medium screens */
-  }
-
-  .daily-check-in .message {
-    font-size: 1rem; /* Adjust font size */
-  }
-}
-
-/* For large screens (larger than 768px) */
-@media (min-width: 768px) {
-  .daily-check-in {
-    width: 400px; /* Restore max-width */
-    padding: 20px;
-  }
-
-  .daily-check-in h3 {
-    font-size: 1.5rem; /* Restore original font size */
-  }
-
-  .daily-check-in input {
-    font-size: 1rem; /* Keep font size for larger screens */
-  }
-
-  .daily-check-in button {
-    font-size: 1rem; /* Maintain font size */
-  }
-
-  .daily-check-in .streak {
-    font-size: 1.2rem; /* Maintain larger font size */
-  }
-
-  .daily-check-in .message {
-    font-size: 1rem; /* Keep font size consistent */
-  }
 }

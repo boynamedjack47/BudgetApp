@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import './SavingsGoal.css';
 
 const SavingsGoalInput = ({ savingsStrategy, remainingIncome, monthlySavings }) => {
   const [isEditing, setIsEditing] = useState(false);

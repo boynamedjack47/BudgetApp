@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-//import './IncomeInput.css';
+import './IncomeInput.css';
 
 const IncomeInput = ({ setIncome }) => {
   const [type, setType] = useState("hourly");

@@ -79,6 +79,10 @@
   margin-bottom: 20px;
 }
 
+.expenses-section {
+  display: none;
+}
+
 .income-section p,
 .expenses-section p,
 .remaining-income-section p {
@@ -156,8 +160,8 @@ ul li {
 .income-input-form {
   margin: 20px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: ;
+  gap: 15px;
   align-items: center;
 }
 
@@ -238,10 +242,6 @@ ul li {
   .submit-button {
     font-size: 0.9rem;
     padding: 8px 15px;
-  }
-
-  .safe-to-spend-container {
-    max-width: 100%;
   }
 }
 

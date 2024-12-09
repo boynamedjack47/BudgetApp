@@ -207,7 +207,7 @@ button:hover {
 /* Larger screens (768px and up) */
 @media (min-width: 768px) {
   .fixed-expenses-input {
-    width: 60%; /* Center the component on larger screens */
+    width: 95%; /* Center the component on larger screens */
     padding: 25px;
   }
 
@@ -230,7 +230,7 @@ button:hover {
   }
 
   .expense-list {
-    gap: 15px;
+    gap: 0px;
   }
 
   .expense-item {
