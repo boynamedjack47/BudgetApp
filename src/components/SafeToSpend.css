@@ -1,82 +1,149 @@
 .safe-to-spend {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.safe-to-spend h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.amount {
+  font-size: 18px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.safe-to-spend-label {
+  font-weight: bold;
+}
+
+.safe-to-spend-amount {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.safe-to-spend-amount.green {
+  color: #7ec850; /* Green */
+}
+
+.safe-to-spend-amount.green-light {
+  color: #a8d08d; /* Light Green */
+}
+
+.safe-to-spend-amount.yellow {
+  color: #f1c232; /* Yellow */
+}
+
+.safe-to-spend-amount.red {
+  color: #e97451; /* Red */
+}
+
+.progress-container {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0px;
+}
+
+.progress-bar {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.progress-bar.green {
+  background-color: #7ec850; /* Green */
+}
+
+.progress-bar.green-light {
+  background-color: #a8d08d; /* Light Green */
+}
+
+.progress-bar.yellow {
+  background-color: #f1c232; /* Yellow */
+}
+
+.progress-bar.red {
+  background-color: #e97451; /* Red */
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  margin-top: 0px;
+}
+
+/* Mobile responsive styling */
+@media (max-width: 768px) {
+  .safe-to-spend {
+    padding: 15px; /* Reduce padding for smaller screens */
   }
-  
+
   .safe-to-spend h2 {
-    font-size: 24px;
-    color: #333;
+    font-size: 20px; /* Adjust font size for headings */
   }
-  
+
   .amount {
-    font-size: 18px;
-    margin: 10px 0;
-    display: flex;
-    justify-content: space-between;
+    font-size: 16px; /* Adjust font size */
+    flex-direction: column; /* Stack the label and amount vertically */
+    align-items: flex-start; /* Align text to the left */
   }
-  
-  .safe-to-spend-label {
-    font-weight: bold;
-  }
-  
+
   .safe-to-spend-amount {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: right;
+    font-size: 18px; /* Adjust font size for amounts */
+    text-align: left; /* Align amount text to the left */
   }
-  
-  .safe-to-spend-amount.green {
-    color: #7ec850; /* Green */
-  }
-  
-  .safe-to-spend-amount.green-light {
-    color: #a8d08d; /* Light Green */
-  }
-  
-  .safe-to-spend-amount.yellow {
-    color: #f1c232; /* Yellow */
-  }
-  
-  .safe-to-spend-amount.red {
-    color: #e97451; /* Red */
-  }
-  
+
   .progress-container {
-    width: 100%;
-    height: 20px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 0px;
+    height: 15px; /* Make the progress bar smaller */
   }
-  
+
   .progress-bar {
     height: 100%;
-    transition: width 0.3s ease, background-color 0.3s ease;
   }
-  
-  .progress-bar.green {
-    background-color: #7ec850; /* Green */
-  }
-  
-  .progress-bar.green-light {
-    background-color: #a8d08d; /* Light Green */
-  }
-  
-  .progress-bar.yellow {
-    background-color: #f1c232; /* Yellow */
-  }
-  
-  .progress-bar.red {
-    background-color: #e97451; /* Red */
-  }
-  
+
   p {
-    font-size: 14px;
-    color: #555;
-    margin-top: 0px;
+    font-size: 12px; /* Adjust font size for small screens */
   }
-  
+}
+
+@media (max-width: 480px) {
+  /* Adjust for very small screens */
+  .safe-to-spend {
+    padding: 10px; /* Further reduce padding */
+  }
+
+  .safe-to-spend h2 {
+    font-size: 18px; /* Reduce heading font size */
+  }
+
+  .amount {
+    font-size: 14px; /* Reduce font size for amount */
+    flex-direction: column; /* Keep stacked vertically */
+    align-items: flex-start;
+  }
+
+  .safe-to-spend-amount {
+    font-size: 16px; /* Smaller font size for amounts */
+    text-align: left;
+  }
+
+  .progress-container {
+    height: 12px; /* Reduce height for smaller screens */
+  }
+
+  .progress-bar {
+    height: 100%;
+  }
+
+  p {
+    font-size: 12px; /* Small font size for text */
+  }
+}

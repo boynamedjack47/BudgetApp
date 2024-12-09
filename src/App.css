@@ -1,5 +1,14 @@
+/* General styling for the app */
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
@@ -24,6 +33,7 @@
   color: white;
 }
 
+/* Links styling */
 .App-link {
   color: #61dafb;
 }
@@ -36,91 +46,100 @@
     transform: rotate(360deg);
   }
 }
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full viewport height */
-  background-color: #f9f9f9; /* Optional background color */
-  font-family: Arial, sans-serif; /* Set a font for your app */
-  margin: 0;
-}
 
+/* Content container styling */
 .content {
   text-align: center;
   width: 100%;
-  background: #f9f9f9; /* Optional: add a background for the content */
+  max-width: 1200px;
+  background: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto;
 }
 
-
-li {
-  display: flex;
-  justify-content: center;
-
-}
-
+/* Budget display sections */
 .budget-display {
   display: flex;
- flex-direction: column;
+  flex-direction: column;
   justify-content: center;
- 
-  
+  margin: 20px;
 }
 
-/* Positive monetary values (e.g., income, savings) */
-.money-positive {
-  color: white; /* White text for contrast */
-  background-color: #4caf50; /* Green background */
+.budget-display h2,
+.budget-display h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.income-section,
+.expenses-section,
+.remaining-income-section {
+  margin-bottom: 20px;
+}
+
+.income-section p,
+.expenses-section p,
+.remaining-income-section p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+/* List styles */
+ul {
+  padding-left: 20px;
+}
+
+ul li {
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Money display styles */
+.money-positive,
+.money-negative {
   padding: 5px 10px;
   border-radius: 5px;
   font-weight: bold;
   font-size: 1.2em;
   display: inline-block;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.money-positive {
+  color: white;
+  background-color: #4caf50;
   box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);
-  transition: background-color 0.3s ease;
 }
 
 .money-positive:hover {
-  background-color: #388e3c; /* Darker green on hover */
+  background-color: #388e3c;
+  transform: scale(1.05);
 }
 
-/* Negative monetary values (e.g., overspending, debt) */
 .money-negative {
-  color: white; /* White text for contrast */
-  background-color: #f44336; /* Red background */
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  font-size: 1.2em;
-  display: inline-block;
+  color: white;
+  background-color: #f44336;
   box-shadow: 0 4px 6px rgba(255, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
 }
 
 .money-negative:hover {
-  background-color: #d32f2f; /* Darker red on hover */
+  background-color: #d32f2f;
+  transform: scale(1.05);
 }
 
-/* Styling for general amount display */
-.money-value-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0;
-  font-size: 1.1em;
-  font-family: Arial, sans-serif;
+/* Savings goal section */
+.savings-goal-section {
+  margin-top: 20px;
 }
 
-/* Clean design for amounts in the BudgetDisplay and SafeToSpend components */
 .amount-container {
   margin: 10px 0;
   text-align: center;
   font-size: 1.2em;
   font-weight: bold;
-  color: #333;
 }
 
 .amount-container span {
@@ -133,117 +152,24 @@ li {
   transform: scale(1.05);
 }
 
-/* Adjust the font size for smaller amounts */
-.small-money {
-  font-size: 1em;
-}
-
-/* Additional general styling for money display */
-.money-display {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-size: 1.1em;
-  text-align: center;
-  font-weight: 600;
-}
-
-.money-display.positive {
-  background-color: #4caf50; /* Green */
-  color: white;
-}
-
-.money-display.negative {
-  background-color: #f44336; /* Red */
-  color: white;
-}
-.positive-money {
-  background-color: #4CAF50; /* Green background for positive values */
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  display: inline;
-  font-weight: bold;
-}
-
-.negative-money {
-  background-color: #f44336; /* Red background for negative values */
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  display: inline;
-  font-weight: bold;
-}
-
-/* Additional styling for the budget display sections */
-.budget-display {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-}
-
-.budget-display h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.budget-display h3 {
-  font-size: 20px;
-  margin-top: 10px;
-}
-
-.income-section,
-.expenses-section,
-.remaining-income-section {
-  margin-bottom: 20px;
-}
-.expenses-section{
-  display: none;
-}
-
-.income-section p,
-.expenses-section p,
-.remaining-income-section p {
-  font-size: 16px;
-  margin: 5px 0;
-}
-
-ul {
-  padding-left: 20px;
-}
-
-ul li {
-  font-size: 16px;
-}
-
-.savings-goal-section {
-  margin-top: 20px;
-}
-
-/* Styling for the income input form */
+/* Form styling */
 .income-input-form {
-  font-family: Arial, sans-serif;
   margin: 20px;
   display: flex;
-}
-
-.income-input-form h2 {
-  font-size: 20px;
-  margin-bottom: 0px;
-display: flex;
-
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
 .income-input-form label {
-  font-size: 16px;
+  font-size: 1rem;
   display: block;
-  margin: 10px 0;
 }
 
-.income-input-form .input-field,
-.income-input-form .select-input {
-  padding: 0px;
-  margin-top: 0px;
-  font-size: 14px;
+.input-field,
+.select-input {
+  padding: 10px;
+  font-size: 1rem;
   width: 100%;
   max-width: 300px;
   border-radius: 5px;
@@ -251,42 +177,92 @@ display: flex;
   text-align: center;
 }
 
-.income-input-form .submit-button {
-  background-color: #4CAF50;
+.submit-button {
+  background-color: #4caf50;
   color: white;
-  font-size:  16px;
+  font-size: 1rem;
   border: none;
   border-radius: 15px;
   cursor: pointer;
-  width: 100%;
-  max-width: 84px;
-  
+  padding: 10px 20px;
 }
 
-.income-input-form .submit-button:hover {
+.submit-button:hover {
   background-color: #45a049;
 }
 
-/* App.css */
+/* Safe-to-spend container */
 .safe-to-spend-container {
   display: flex;
-  flex-direction: column; /* Stacks the components in a column */
-  gap: 0px; /* Adds space between the components */
-  max-width: 350px; /* Optional: Limit the width of the container */
-  width: 100%; /* Ensures it uses full width */
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
 }
 
 .safe-to-spend-container > div {
   flex: 1;
-  background-color: #f4f4f4; /* Light background for visibility */
-  border-radius: 8px; /* Rounded corners for a card-like appearance */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  text-align: center; /* Centers the text */
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 10px;
 }
 
+/* Responsive styling */
 @media (max-width: 768px) {
-  .safe-to-spend-container {
-    right: 10px; /* Adjust positioning for smaller screens */
-    top: 80px; /* Adjust top positioning for smaller screens */
+  .App-header {
+    font-size: calc(8px + 2vmin);
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  .budget-display h2,
+  .budget-display h3 {
+    font-size: 1.25rem;
+  }
+
+  .income-section p,
+  .expenses-section p,
+  .remaining-income-section p {
+    font-size: 0.9rem;
+  }
+
+  .income-input-form {
+    gap: 5px;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    font-size: calc(7px + 2vmin);
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .budget-display h2,
+  .budget-display h3 {
+    font-size: 1.1rem;
+  }
+
+  .income-section p,
+  .expenses-section p,
+  .remaining-income-section p {
+    font-size: 0.8rem;
+  }
+
+  .submit-button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
   }
 }
