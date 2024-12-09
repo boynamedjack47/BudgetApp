@@ -1,54 +1,130 @@
 /* Styles specific to IncomeInput component */
 .income-input {
-    margin-bottom: 20px;
-  }
-  
+  margin-bottom: 20px;
+  width: 100%; /* Ensure full width for small screens */
+  box-sizing: border-box;
+}
+
+.income-input h2 {
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+
+.income-input label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.income-input input,
+.income-input select {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.income-input button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.income-input button:hover {
+  background-color: #45a049;
+}
+
+.toggle-overtime-button {
+  margin-top: 10px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+}
+
+.toggle-overtime-button:hover {
+  background-color: #45a049;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Small screens (up to 480px) */
+@media (max-width: 480px) {
   .income-input h2 {
-    font-size: 20px;
-    margin-bottom: 0px;
+    font-size: 18px; /* Slightly smaller font size for smaller screens */
   }
-  
-  .income-input label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
+
   .income-input input,
   .income-input select {
-    width: 100%;
-    max-width: 300px;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px; /* Increase padding for easier interaction on small screens */
+    font-size: 14px; /* Adjust font size for better readability */
   }
-  
+
   .income-input button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .income-input button:hover {
-    background-color: #45a049;
+    padding: 12px 16px;
+    font-size: 14px; /* Adjust font size */
   }
 
   .toggle-overtime-button {
-    margin-top: 10px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
     font-size: 14px;
-    text-align: center;
+    padding: 8px 12px; /* Increase padding for small screens */
   }
-  
-  .toggle-overtime-button:hover {
-    background-color: #45a049;
+}
+
+/* Medium screens (up to 768px) */
+@media (max-width: 768px) {
+  .income-input h2 {
+    font-size: 20px;
   }
-  
-  
+
+  .income-input input,
+  .income-input select {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .income-input button {
+    padding: 14px 18px;
+    font-size: 16px;
+  }
+
+  .toggle-overtime-button {
+    padding: 8px 14px;
+    font-size: 15px;
+  }
+}
+
+/* Larger screens (768px and up) */
+@media (min-width: 768px) {
+  .income-input {
+    width: 60%; /* Center the component on larger screens */
+    padding: 25px;
+  }
+
+  .income-input h2 {
+    font-size: 24px;
+  }
+
+  .income-input input,
+  .income-input select {
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .income-input button {
+    padding: 16px 20px;
+    font-size: 18px;
+  }
+
+  .toggle-overtime-button {
+    padding: 10px 16px;
+    font-size: 16px;
+  }
+}

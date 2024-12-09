@@ -239,6 +239,10 @@ ul li {
     font-size: 0.9rem;
     padding: 8px 15px;
   }
+
+  .safe-to-spend-container {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {

@@ -1,4 +1,4 @@
-/* Styles specific to BudgetDisplay component */
+/* General BudgetDisplay Styling */
 .budget-display {
   margin: 20px 0;
 }
@@ -23,6 +23,7 @@
   margin: 5px 0;
 }
 
+/* Styling for Positive and Negative Money Values */
 .budget-display .money-positive {
   background-color: #e0ffe0;
   color: #006600;
@@ -37,6 +38,7 @@
   border-radius: 4px;
 }
 
+/* Savings Breakdown Styling */
 .savingsbreakdown {
   display: flex;
   flex-direction: column;
@@ -47,10 +49,10 @@
   color: black;
 }
 
-/* Style for the savings amounts */
+/* Styling for Savings Amounts */
 .savings-amount {
   font-weight: bold;
-  background-color: #45a049; /* Use the same green for amounts */
+  background-color: #45a049;
   color: white;
   padding: 5px;
   border-radius: 5px;
@@ -65,98 +67,77 @@
   font-weight: bold;
 }
 
-/* Continue Adjustments for Mobile Responsiveness */
+/* Adjustments for Mobile Responsiveness (Up to 768px) */
 @media (max-width: 768px) {
-  /* Adjust font size and padding for savings amounts on mobile */
   .savings-amount {
-    font-size: 1rem; /* Slightly smaller font size for mobile */
-    padding: 4px 8px; /* Reduce padding */
+    font-size: 1rem;
+    padding: 4px 8px;
   }
 
-  /* Make the monthly savings section's text more compact */
   .monthly-savings-section p {
-    font-size: 1rem; /* Adjust font size */
-    padding: 4px 8px; /* Reduce padding */
+    font-size: 1rem;
+    padding: 4px 8px;
   }
 
-  /* Stack elements in savings breakdown to avoid horizontal scrolling */
   .savingsbreakdown {
-    display: flex;
-    flex-direction: column;
-    padding: 10px; /* Add padding for spacing */
+    padding: 10px;
   }
 
-  /* Ensure that the income and expenses sections are stacked vertically */
   .budget-display .income-section,
   .budget-display .expenses-section,
   .budget-display .remaining-income-section {
-    margin-bottom: 15px; /* Reduce space between sections */
-    display: block; /* Stack sections vertically */
+    margin-bottom: 15px;
+    display: block;
   }
 
-  /* Adjust the layout of the entire budget display */
   .budget-display {
     padding: 10px;
   }
 
-  /* Full-width buttons on mobile */
   .submit-button {
-    width: 100%; /* Ensure buttons take the full width of the container */
-    font-size: 1rem; /* Adjust font size to match mobile design */
+    width: 100%;
+    font-size: 1rem;
   }
 
-  /* Adjust input fields */
   .income-input-form .input-field,
   .income-input-form .select-input {
-    font-size: 1rem; /* Slightly bigger font for better readability */
-    padding: 12px; /* Increase padding for input fields */
-    width: 100%; /* Ensure input fields fill the container */
-    box-sizing: border-box; /* Ensure padding doesn't overflow container */
+    font-size: 1rem;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  /* Responsive text and layout for money display */
   .money-value-container {
-    flex-direction: column; /* Stack elements vertically on mobile */
+    flex-direction: column;
     text-align: center;
     margin: 5px 0;
   }
 
   .money-value-container span {
-    font-size: 1.1rem; /* Adjust text size */
+    font-size: 1.1rem;
     padding: 8px;
   }
 
-  /* Adjust spacing in savings goal section */
   .savings-goal-section {
     margin-top: 15px;
   }
 
-  /* Adapt ul and list items */
   ul {
     padding-left: 20px;
-    font-size: 1rem; /* Adjust font size for list items */
+    font-size: 1rem;
   }
 
   ul li {
     margin: 5px 0;
   }
 
-  /* Make savings section visually clear and mobile-friendly */
-  .savings-goal-section p {
-    font-size: 1rem;
-    padding: 5px 10px;
-  }
-
-  /* Make overall content container more mobile-friendly */
   .content {
     padding: 15px;
-    margin: 0;
   }
 }
 
-/* Media query for very small screens (up to 480px) */
+/* Responsive Adjustments for Very Small Screens (Up to 480px) */
 @media (max-width: 480px) {
-  /* Adjust font size for extremely small screens */
   .budget-display h2 {
     font-size: 16px;
   }
@@ -166,32 +147,29 @@
   }
 
   .budget-display p {
-    font-size: 1rem; /* Make text smaller for very small screens */
+    font-size: 1rem;
   }
 
   .savings-amount {
-    font-size: 0.9rem; /* Adjust font size */
+    font-size: 0.9rem;
     padding: 4px 6px;
   }
 
   .money-positive,
   .money-negative {
-    font-size: 1rem; /* Adjust font size */
-    padding: 4px 8px; /* Reduce padding */
+    font-size: 1rem;
+    padding: 4px 8px;
   }
 
-  /* Ensure content takes full width and looks neat on small screens */
   .content {
     padding: 10px;
   }
 
-  /* Make sure buttons fill the width */
   .submit-button {
     width: 100%;
     font-size: 1rem;
   }
 
-  /* Responsive layout for flex containers */
   .savingsbreakdown,
   .income-input-form,
   .money-value-container {
@@ -199,9 +177,8 @@
     width: 100%;
   }
 
-  /* Adjust spacing in list items */
   ul li {
-    font-size: 0.9rem; /* Adjust font size */
+    font-size: 0.9rem;
     padding: 8px;
   }
 }

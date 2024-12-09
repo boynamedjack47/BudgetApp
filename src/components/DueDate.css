@@ -1,16 +1,22 @@
+/* Base Styling for Due Date Component */
 .due-date-component {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
+    padding: 15px;
+    width: 100%; /* Ensure it fits the container */
+    box-sizing: border-box;
   }
   
+  /* Upcoming List Styling */
   .upcoming-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
+    align-items: flex-start; /* Align items to the left for better readability */
   }
   
+  /* Upcoming Item Styling */
   .upcoming-item {
     display: flex;
     align-items: center;
@@ -18,9 +24,67 @@
     background: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
+    width: 100%; /* Ensure items fill the container */
+    box-sizing: border-box;
   }
   
+  /* Style for the text within each upcoming item */
   .upcoming-item strong {
     margin-right: 8px;
+    font-weight: bold;
+  }
+  
+  /* Responsive Design */
+  
+  /* For small screens (up to 480px) */
+  @media (max-width: 480px) {
+    .due-date-component {
+      padding: 10px; /* Reduce padding */
+      width: 90%; /* Ensure it fills most of the screen width */
+      margin: 0 auto; /* Center the component */
+    }
+  
+    .upcoming-item {
+      padding: 10px; /* Increase padding for better touch targets */
+      flex-direction: column; /* Stack the content vertically */
+      align-items: flex-start; /* Ensure text is aligned to the left */
+    }
+  
+    .upcoming-item strong {
+      margin-bottom: 5px; /* Add spacing between the label and date */
+    }
+  
+    .upcoming-list {
+      align-items: stretch; /* Make sure the list fills the width */
+    }
+  }
+  
+  /* For medium screens (up to 768px) */
+  @media (max-width: 768px) {
+    .due-date-component {
+      padding: 15px; /* Restore padding for medium screens */
+      width: 80%; /* Reduce width slightly for medium screens */
+    }
+  
+    .upcoming-item {
+      padding: 12px; /* Slightly more padding */
+    }
+  
+    .upcoming-item strong {
+      margin-right: 12px; /* Increase spacing on medium screens */
+    }
+  }
+  
+  /* For larger screens (768px and up) */
+  @media (min-width: 768px) {
+    .due-date-component {
+      width: 60%; /* Set a fixed width for larger screens */
+      padding: 20px; /* Ensure enough padding for large screens */
+    }
+  
+    .upcoming-item {
+      padding: 15px; /* Standard padding */
+      width: 100%; /* Ensure items stretch across */
+    }
   }
   

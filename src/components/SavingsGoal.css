@@ -1,32 +1,73 @@
 /* Styles specific to SavingsGoal component */
 .savings-goal {
-    margin: 20px 0;
+  margin: 20px 0;
+}
+
+.savings-goal h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.savings-goal input {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.savings-goal button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.savings-goal button:hover {
+  background-color: #218838;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .savings-goal {
+    margin: 15px 0; /* Adjust margin for smaller screens */
   }
-  
+
   .savings-goal h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 16px; /* Slightly smaller heading */
   }
-  
+
   .savings-goal input {
-    width: 100%;
-    max-width: 300px;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    max-width: 100%; /* Ensure input spans full width */
+    padding: 6px; /* Adjust padding for smaller screens */
   }
-  
+
   .savings-goal button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    font-size: 14px; /* Adjust button font size */
+    padding: 8px 12px; /* Reduce padding for smaller screens */
   }
-  
-  .savings-goal button:hover {
-    background-color: #218838;
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .savings-goal {
+    margin: 10px 0; /* Reduce margin */
   }
-  
+
+  .savings-goal h3 {
+    font-size: 14px; /* Smaller font size for heading */
+  }
+
+  .savings-goal input {
+    max-width: 100%; /* Ensure input spans full width */
+    padding: 5px; /* Further reduce padding */
+  }
+
+  .savings-goal button {
+    font-size: 12px; /* Smaller font size for buttons */
+    padding: 6px 10px; /* Smaller button size */
+  }
+}
