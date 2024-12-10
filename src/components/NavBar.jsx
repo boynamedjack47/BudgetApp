@@ -26,7 +26,7 @@ const NavBar = () => {
 
   return (
     <div className="navbar">
-      <h2 className="logo">BudgetApp</h2>
+      <h2 className="logo">Daily Budget</h2>
       <ul className="nav-links">
         <li>
           <Link to="/income">Income</Link>

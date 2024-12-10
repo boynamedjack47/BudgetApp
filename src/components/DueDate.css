@@ -87,4 +87,15 @@
       width: 100%; /* Ensure items stretch across */
     }
   }
+  /* Style for the expense amount */
+.expense-amount {
+    background-color: red;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+  }
   
+  .total-upcoming-expenses {
+    margin-top: 15px;
+  }

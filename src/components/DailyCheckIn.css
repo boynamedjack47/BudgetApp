@@ -68,3 +68,11 @@
   text-align: center;
   font-size: 1rem;
 }
+/* Style for the daily budget amount */
+.daily-budget-amount {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+}

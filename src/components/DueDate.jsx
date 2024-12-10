@@ -74,9 +74,15 @@ const DueDateComponent = ({ expenses }) => {
       ) : (
         <p>No upcoming expenses within the next 7 days.</p>
       )}
-      <div className="total-upcoming-expenses">
-        <h4>Total Upcoming Expenses: ${calculateTotalUpcomingExpenses().toFixed(2)}</h4>
-      </div>
+   <div className="total-upcoming-expenses">
+  <h4>
+    Total Upcoming Expenses:{" "}
+    <span className="expense-amount">
+      ${calculateTotalUpcomingExpenses().toFixed(2)}
+    </span>
+  </h4>
+</div>
+
     </div>
   );
 };

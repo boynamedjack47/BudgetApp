@@ -53,7 +53,13 @@ const DailyCheckIn = ({ safeToSpendAmount, customSavings }) => {
   return (
     <div className="daily-check-in">
       <h3>Daily Check-In</h3>
-      <p>Daily Budget: ${dailyBudget}</p>
+      <p>
+  Daily Budget:{" "}
+  <span className="daily-budget-amount">
+    ${dailyBudget.toFixed(2)}
+  </span>
+</p>
+
       {!isCheckInAllowed() ? (
         <p>You have already checked in today. Come back tomorrow!</p>
       ) : (
