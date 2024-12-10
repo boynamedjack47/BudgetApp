@@ -80,7 +80,7 @@
 }
 
 .expenses-section {
-  display: none;
+  
 }
 
 .income-section p,
@@ -158,6 +158,7 @@ ul li {
 
 /* Form styling */
 .income-input-form {
+  flex-direction: column;
   margin: 20px;
   display: flex;
   gap: 15px;

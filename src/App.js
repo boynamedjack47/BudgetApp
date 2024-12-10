@@ -130,21 +130,23 @@ function App() {
               </div>
             } />
 
-            {/* Route for income and expense inputs on dashboard */}
+            {/* Route for expenses input */}
+            <Route path="/expenses" element={
+              <div className="expenseinput">
+                <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} />
+              </div>
+            } />
+
+            {/* Route for dashboard (showing income, budget, etc.) */}
             <Route path="/" element={
-              <>
-                <div className="expenseinput">
-                  <div className="maincontent">
-                    <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} />
-                  </div>
-                  <BudgetDisplay
-                    income={income}
-                    expenses={expenses}
-                    remainingIncome={remainingIncome}
-                    monthlySavings={monthlySavings}
-                  />
-                </div>
-              </>
+              <div className="maincontent">
+                <BudgetDisplay
+                  income={income}
+                  expenses={expenses}
+                  remainingIncome={remainingIncome}
+                  monthlySavings={monthlySavings}
+                />
+              </div>
             } />
 
             {/* Route for savings strategy and options */}
@@ -176,8 +178,8 @@ function App() {
             } />
 
             <Route path="/reports" element={
+              
               <div className="safe-to-spend-container">
-                {/* Display remaining income */}
                 <div>
                   <SafeToSpend
                     remainingIncome={remainingIncome}
@@ -207,7 +209,7 @@ function App() {
                 <div>
                   <DueDateComponent expenses={expenses} />
                 </div>
-              </div>
+             </div>
             } />
           </Routes>
         </div>
