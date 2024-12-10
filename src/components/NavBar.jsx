@@ -35,10 +35,10 @@ const NavBar = () => {
           <Link to="/expenses">Expenses</Link>
         </li>
         <li>
-          <Link to="/">Budget Breakdown</Link>
+          <Link to="/savings">Savings Strategy</Link>
         </li>
         <li>
-          <Link to="/savings">Savings Strategy</Link>
+          <Link to="/">Budget Breakdown</Link>
         </li>
         <li>
           <Link to="/reports">Reports</Link>

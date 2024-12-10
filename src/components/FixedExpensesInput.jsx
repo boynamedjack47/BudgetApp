@@ -155,7 +155,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
             max="31"
           />
         </div>
-        <button onClick={handleAddOrEditExpense}>
+        <button className="expense-button" onClick={handleAddOrEditExpense}>
           {editingId ? "Save Changes" : "Add Expense"}
         </button>
       </div>

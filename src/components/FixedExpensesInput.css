@@ -255,3 +255,8 @@ button:hover {
 .money-negative {
   margin-left: 5px;
 }
+
+.expense-button {
+  padding: 0px;
+  border-radius: 10px;
+}
