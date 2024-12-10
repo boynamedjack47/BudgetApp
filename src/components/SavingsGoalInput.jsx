@@ -59,7 +59,7 @@ const SavingsGoalInput = ({ savingsStrategy, remainingIncome, monthlySavings }) 
         </div>
       ) : (
         <div>
-          <p>Current Savings Goal: ${parseFloat(goal).toFixed(2)}</p>
+          <p>Current Savings Goal: <span className="money-positive">${parseFloat(goal).toFixed(2)}</span></p>
       
           <p>
             Months to Reach Goal: {monthsToGoal ? `${monthsToGoal} months` : "N/A"}

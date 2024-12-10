@@ -169,7 +169,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
                 icon={getCategoryIcon(expense.category)}
                 style={{ marginRight: "10px" }}
               />
-              <strong>{expense.name}</strong> - ${expense.amount.toFixed(2)} 
+              <strong>{expense.name}</strong> - <span className="money-negative">${expense.amount.toFixed(2)} </span>
               {expense.dueDay && (
                 <span> (Due: The {getOrdinalSuffix(expense.dueDay)})</span>
               )}
@@ -193,7 +193,7 @@ const FixedExpensesInput = ({ expenses, setExpenses }) => {
 
       {/* Display the total cost of all expenses */}
       <div className="total-expenses">
-        <h4>Total Expenses: ${calculateTotal().toFixed(2)}</h4>
+        <h4>Total Expenses: <span className="money-positive">${calculateTotal().toFixed(2)}</span></h4>
       </div>
     </div>
   );

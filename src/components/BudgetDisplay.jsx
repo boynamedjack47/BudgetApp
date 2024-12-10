@@ -21,9 +21,9 @@ const BudgetDisplay = ({ income, expenses, remainingIncome, monthlySavings, savi
         <h3>Income Breakdown</h3>
         {breakdown ? (
           <>
-            <p>Annual Income: ${breakdown.annual}</p>
-            <p>Monthly Income: ${breakdown.monthly}</p>
-            <p>Bi-Weekly Income: ${breakdown.biweekly}</p>
+            <p>Annual Income: <span className="money-positive">${breakdown.annual}</span></p>
+            <p>Monthly Income: <span className="money-positive">${breakdown.monthly}</span></p>
+            <p>Bi-Weekly Income: <span className="money-positive">${breakdown.biweekly}</span></p>
           </>
         ) : (
           <p>No income data available.</p>
@@ -50,7 +50,7 @@ const BudgetDisplay = ({ income, expenses, remainingIncome, monthlySavings, savi
       <div className="remaining-income-section">
         <h3>Income After Expenses</h3>
         <p className={remainingIncome >= 0 ? "positive-money" : "negative-money"}>
-          ${remainingIncome.toFixed(2)}
+          <span className="money-positive">${remainingIncome.toFixed(2)}</span>
         </p>
       </div>
 
