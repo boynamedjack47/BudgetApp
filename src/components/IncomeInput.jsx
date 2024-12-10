@@ -26,7 +26,7 @@ const IncomeInput = ({ setIncome }) => {
       const weeklyIncome = regularHours * amount + overtimeHours * amount * 1.5;
       annualIncome = weeklyIncome * 52; // 52 weeks in a year
     } else {
-      annualIncome = amount; // Annual salary
+      annualIncome = parseFloat(amount); // Ensure it's a number for salary
     }
 
     // Breakdown for monthly and bi-weekly income
