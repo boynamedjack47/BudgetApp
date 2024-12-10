@@ -149,37 +149,44 @@ function App() {
               </div>
             } />
 
-            {/* Route for savings strategy and options */}
-            <Route path="/savings" element={
-              <div>
-                <label htmlFor="strategy">Select Savings Strategy: </label>
-                <select id="strategy" value={savingsStrategy} onChange={handleStrategyChange}>
-                  <option value="Aggressive">Aggressive (100%)</option>
-                  <option value="Moderate">Moderate (50%)</option>
-                  <option value="Passive">Passive (25%)</option>
-                  <option value="Custom">Custom</option>
-                </select>
+<Route path="/savings" element={
+  <div>
+    <label htmlFor="strategy">Select Savings Strategy: </label>
+    <select id="strategy" value={savingsStrategy} onChange={handleStrategyChange}>
+      <option value="Aggressive">Aggressive (100%)</option>
+      <option value="Moderate">Moderate (50%)</option>
+      <option value="Passive">Passive (25%)</option>
+      <option value="Custom">Custom</option>
+    </select>
 
-                {savingsStrategy === "Custom" && (
-                  <div>
-                    <label htmlFor="customSavings">Enter Custom Savings %: </label>
-                    <input
-                      type="number"
-                      id="customSavings"
-                      value={customSavings}
-                      onChange={handleCustomSavingsChange}
-                      min="0"
-                      max="100"
-                    />
-                    <span>%</span>
-                  </div>
-                )}
-              </div>
-            } />
+    {savingsStrategy === "Custom" && (
+      <div>
+        <label htmlFor="customSavings">Enter Custom Savings %: </label>
+        <input
+          type="number"
+          id="customSavings"
+          value={customSavings}
+          onChange={handleCustomSavingsChange}
+          min="0"
+          max="100"
+        />
+        <span>%</span>
+      </div>
+    )}
+
+    {/* Pass monthlySavings to SavingsGoalInput */}
+    <SavingsGoalInput
+      savingsGoal={savingsGoal}
+      setSavingsGoal={setSavingsGoal}
+      monthlySavings={monthlySavings}
+    />
+  </div>
+} />
+
 
             <Route path="/reports" element={
-              
-              <div className="safe-to-spend-container">
+              // safe-to-spend-container
+              <div className="grid-layout">
                 <div>
                   <SafeToSpend
                     remainingIncome={remainingIncome}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import "./PieChart.css"
 
 // Register required Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -34,7 +35,7 @@ const PieChart = ({ data }) => {
 
   return (
     <>
-      <div style={{ width: "80%", maxWidth: "600px", margin: "auto", height: "275px" }}>
+      <div style={{ width: "80%", maxWidth: "600px", margin: "auto", height: "210px" }}>
         <h2>Expense Breakdown</h2> {/* Place the header before the Pie chart */}
         <Pie data={chartData} options={chartOptions} />
       </div>
