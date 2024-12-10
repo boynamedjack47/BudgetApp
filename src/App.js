@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import IncomeInput from "./components/IncomeInput";
 import FixedExpensesInput from "./components/FixedExpensesInput";
 import SavingsGoalInput from "./components/SavingsGoalInput";
@@ -9,8 +10,6 @@ import DailyCheckIn from "./components/DailyCheckIn";
 import DueDateComponent from "./components/DueDate";
 import NavBar from "./components/NavBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 import "./App.css";
 
 function App() {
@@ -118,92 +117,102 @@ function App() {
   }, [customSavings]);
 
   return (
-    <div className="App">
-      <div className="content">
-        <h1>Budget Tracker</h1>
-        <div className="incomeinput">
-          <IncomeInput setIncome={setIncome} />
+    <Router>
+      <div className="App">
+        <NavBar />
+        <div className="content">
+          <h1>Budget Tracker</h1>
+          <Routes>
+            {/* Route for income input */}
+            <Route path="/income" element={
+              <div className="incomeinput">
+                <IncomeInput setIncome={setIncome} />
+              </div>
+            } />
+
+            {/* Route for income and expense inputs on dashboard */}
+            <Route path="/" element={
+              <>
+                <div className="expenseinput">
+                  <div className="maincontent">
+                    <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} />
+                  </div>
+                  <BudgetDisplay
+                    income={income}
+                    expenses={expenses}
+                    remainingIncome={remainingIncome}
+                    monthlySavings={monthlySavings}
+                  />
+                </div>
+              </>
+            } />
+
+            {/* Route for savings strategy and options */}
+            <Route path="/savings" element={
+              <div>
+                <label htmlFor="strategy">Select Savings Strategy: </label>
+                <select id="strategy" value={savingsStrategy} onChange={handleStrategyChange}>
+                  <option value="Aggressive">Aggressive (100%)</option>
+                  <option value="Moderate">Moderate (50%)</option>
+                  <option value="Passive">Passive (25%)</option>
+                  <option value="Custom">Custom</option>
+                </select>
+
+                {savingsStrategy === "Custom" && (
+                  <div>
+                    <label htmlFor="customSavings">Enter Custom Savings %: </label>
+                    <input
+                      type="number"
+                      id="customSavings"
+                      value={customSavings}
+                      onChange={handleCustomSavingsChange}
+                      min="0"
+                      max="100"
+                    />
+                    <span>%</span>
+                  </div>
+                )}
+              </div>
+            } />
+
+            <Route path="/reports" element={
+              <div className="safe-to-spend-container">
+                {/* Display remaining income */}
+                <div>
+                  <SafeToSpend
+                    remainingIncome={remainingIncome}
+                    savingsStrategy={
+                      savingsStrategy === "Custom"
+                        ? customSavings / 100
+                        : savingsStrategy === "Aggressive"
+                        ? 1
+                        : savingsStrategy === "Moderate"
+                        ? 0.5
+                        : 0.25
+                    }
+                  />
+                </div>
+
+                {/* Expense Distribution Pie Chart */}
+                <div>
+                  <PieChart data={pieChartData} />
+                </div>
+
+                {/* Daily Check-In Section */}
+                <div>
+                  <DailyCheckIn safeToSpendAmount={safeToSpendAmount} />
+                </div>
+
+                {/* Upcoming Expenses Component */}
+                <div>
+                  <DueDateComponent expenses={expenses} />
+                </div>
+              </div>
+            } />
+          </Routes>
         </div>
-        <div className="expenseinput">
-          <div className="maincontent">
-            <FixedExpensesInput expenses={expenses} setExpenses={setExpenses} />
-          </div>
-          <BudgetDisplay
-            income={income}
-            expenses={expenses}
-            remainingIncome={remainingIncome}
-            monthlySavings={monthlySavings}
-            
-          />
-        </div>
-
-     
-        
-
-        <div>
-          <label htmlFor="strategy">Select Savings Strategy: </label>
-          <select id="strategy" value={savingsStrategy} onChange={handleStrategyChange}>
-            <option value="Aggressive">Aggressive (100%)</option>
-            <option value="Moderate">Moderate (50%)</option>
-            <option value="Passive">Passive (25%)</option>
-            <option value="Custom">Custom</option>
-          </select>
-        </div>
-
-        {savingsStrategy === "Custom" && (
-          <div>
-            <label htmlFor="customSavings">Enter Custom Savings %: </label>
-            <input
-              type="number"
-              id="customSavings"
-              value={customSavings}
-              onChange={handleCustomSavingsChange}
-              min="0"
-              max="100"
-            />
-            <span>%</span>
-          </div>
-        )}
-
       </div>
-       {/* SafeToSpend, PieChart, and DailyCheckIn */}
-  <div className="safe-to-spend-container">
-  {/* Display remaining income */}
-  <div>
-    <SafeToSpend
-      remainingIncome={remainingIncome}
-      savingsStrategy={
-        savingsStrategy === "Custom"
-          ? customSavings / 100
-          : savingsStrategy === "Aggressive"
-          ? 1
-          : savingsStrategy === "Moderate"
-          ? 0.5
-          : 0.25
-      }
-    />
-  </div>
-
-  {/* Expense Distribution Pie Chart */}
-  <div>
-    <PieChart data={pieChartData} />
-  </div>
-
-  {/* Daily Check-In Section */}
-  <div>
-    <DailyCheckIn safeToSpendAmount={safeToSpendAmount} />
-  </div>
-
-  {/* Upcoming Expenses Component */}
-  <div>
-    <DueDateComponent expenses={expenses} />
-  </div>
-</div>
-
-    
-
-
-    </div>
+    </Router>
   );
 }
 
