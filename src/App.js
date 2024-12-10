@@ -176,10 +176,11 @@ function App() {
 
     {/* Pass monthlySavings to SavingsGoalInput */}
     <SavingsGoalInput
-      savingsGoal={savingsGoal}
-      setSavingsGoal={setSavingsGoal}
-      monthlySavings={monthlySavings}
-    />
+  savingsStrategy={savingsStrategy}
+  remainingIncome={remainingIncome}
+  monthlySavings={monthlySavings}
+/>
+
   </div>
 } />
 
